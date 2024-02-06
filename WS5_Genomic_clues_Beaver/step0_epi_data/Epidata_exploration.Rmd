@@ -1,0 +1,29 @@
+---
+title: "New outbreak in Beavers"
+author: "SVEPM Beavers Health Authority"
+date: "2024-01-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## New outbreak in Beavers
+
+We have received several reports of a new disease in beavers. The quick spread across Sweden and the high letality of the disease ....
+
+Here you can find a summary of the reported cases so far:
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

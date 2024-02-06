@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "Welcome investigators!" | pv -qL 20
+
+echo "We have received several reports of a new disease in mooses The quick spread across Sweden and the high letality of the disease ...." | pv -qL 40 
+
+while true; do
+    read -p "Do you wish to have a look at the reported data so far? " yn
+    case $yn in
+        [Yy]* ) echo "here!  "; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
