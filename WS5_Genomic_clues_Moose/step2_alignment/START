@@ -1,0 +1,27 @@
+#!/bin/sh
+
+
+echo "\n----------------------"
+echo "\e[94mHello investigators, we are your Bioninformatics experts.\n" | pv -qL 20
+
+
+echo "Now, let’s have a look at the genetic data " | pv -qL 40 
+
+cat /files/toy_example.fasta
+
+echo "We have a total of "; grep -c "^>" sequences.fasta; echo " sequences." 
+echo "the sequences are stored in a FASTA file, as you can see in this format you have the sequence name (sequence_id|host|date) following the > and the sequence of nucleotides below."
+
+echo "We are interested in the similarity between the sequences. More similar sequences are more likely to be part of the same transmission cluster. \nFor example. we would like to compare those originating from camels with those from humans. To achieve this, first, we must align the sequences to enable a meaningful comparison of nucleotide sites. "
+while true; do
+    read -p "Would you like to have the genetic sequence (y) Yes, please!  (n) Nah, not interested in those things." yn
+        case $yn in
+            [Yy]* )  cp /files/sequences.fasta  /data/; echo "\nYou can find the FASTA file with the sequences in your CONFIDENTIAL folder. Just double click in the file for a quick visualization.";
+                     break;;
+            [Nn]* ) echo "\nOk. Are then you ready for the press conference? They want answers to the origin and speed of disease transmission of MOO-vi. Continue to step 7."; exit;;
+            * ) echo "\nPlease answer yes or no.";;
+        esac
+done
+
+echo "\nPlease, continue to step 2 to talk with our bioinformatics experts.";
+echo "\e[0m" 

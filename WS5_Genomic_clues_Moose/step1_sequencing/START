@@ -1,0 +1,24 @@
+#!/bin/sh
+
+
+echo "\n----------------------"
+echo "\e[94mDear investigators, we have exciting news!\n" | pv -qL 20
+
+
+echo "Our field epi vet team were able to take some samples from x moose individuals and 100 humans. We sent them to the sequencing lab and we have the results back!" | pv -qL 40 
+
+cat /files/ascii_dna.txt
+
+
+while true; do
+    read -p "Would you like to have the genetic sequence (y) Yes, please!  (n) Nah, not interested in those things." yn
+        case $yn in
+            [Yy]* )  cp /files/sequences.fasta  /data/; echo "\nYou can find the FASTA file with the sequences in your CONFIDENTIAL folder. Just double click in the file for a quick visualization.";
+                     break;;
+            [Nn]* ) echo "\nOk. Are then you ready for the press conference? They want answers to the origin and speed of disease transmission of MOO-vi. Continue to step 7."; exit;;
+            * ) echo "\nPlease answer yes or no.";;
+        esac
+done
+
+echo "\nPlease, continue to step 2 to talk with our bioinformatics experts.";
+echo "\e[0m" 
