@@ -1,0 +1,35 @@
+#!/bin/sh
+
+
+echo "\n----------------------"
+echo "\e[94mWelcome investigators!\n" | pv -qL 20
+
+
+echo "We have received several reports of a new disease in mooses The quick spread across Sweden and the high letality of the disease ...." | pv -qL 40 
+
+cat /files/ascii_moose.txt
+
+
+while true; do
+    read -p "Are you ready to take the challenge of unraveling the transmission dynamics of this new disease?" yn
+        case $yn in
+            [Yy]* ) echo "\nGreat! We knew we could count on you.";
+                    echo "Our surveillance team has been working on the analysis of the reported case counts. "; break;;
+            [Nn]* ) echo "\nOh, how bad, you were recommended as the best team for this job. We will have to find other investigators. Goodbye!"; exit;;
+            * ) echo "\nPlease answer yes or no.";;
+        esac
+done
+
+echo "\n";
+
+while true; do
+    read -p "Do you wish to have a look at the reported data so far?" yn
+        case $yn in
+            [Yy]* ) cp /files/fig1_merscov.pdf  /data/; echo "\nYou just receive the temporal and spatial plots made by the veterinary services in charge of the surveillance. Please, go to the CONFIDENTIAL_investigators folder to open the files.";
+                    echo "\nCan you guess the role that mooses and humans play in the spread of this new disease? Continue to step 1."; break;;
+            [Nn]* ) echo "\nPlease, start step 1 to continue."; exit;;
+            * ) echo "\nPlease answer yes or no.";;
+        esac
+done
+
+echo "\e[0m" 
