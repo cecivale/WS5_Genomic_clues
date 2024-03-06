@@ -13,7 +13,7 @@ cat /files/ascii_dna.txt
 while true; do
     read -p "Would you like to have the genetic sequence (y) Yes, please!  (n) Nah, not interested in those things." yn
         case $yn in
-            [Yy]* )  cp /files/sequences.fasta  /data/; echo "\nYou can find the FASTA file with the sequences in your CONFIDENTIAL folder. Just double click in the file for a quick visualization.";
+            [Yy]* )  cp /files/moose_10_274_na.fasta  /data/; echo "\nYou can find the FASTA file with the sequences in your CONFIDENTIAL folder. Just double click in the file for a quick visualization.";
                      break;;
             [Nn]* ) echo "\nOk. Are then you ready for the press conference? They want answers to the origin and speed of disease transmission of MOO-vi. Continue to step 7."; exit;;
             * ) echo "\nPlease answer yes or no.";;
