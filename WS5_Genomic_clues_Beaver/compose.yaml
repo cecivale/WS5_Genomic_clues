@@ -1,0 +1,75 @@
+services:
+  step1:
+    build: step1_epi_data/
+    command:
+      - /bin/sh
+      - -c
+      - |
+        echo " ---> Go to the Exec panel and type START" 
+        sleep infinity
+    volumes:
+      - ./CONFIDENTIAL_investigators:/data/
+      - ./step1_epi_data/files:/files/
+    container_name: Step1_Epi_data
+
+  step2:
+    build: step2_sequencing/
+    command:
+      - /bin/sh
+      - -c
+      - |
+        echo " ---> Go to the Exec panel and type START" 
+        sleep infinity
+    stdin_open: true 
+    tty: true
+    volumes:
+      - ./CONFIDENTIAL_investigators:/data/
+      - ./step2_sequencing/files:/files/
+    container_name: Step2_Sequencing
+
+  step3:
+    build: step3_model_design/
+    entrypoint: 
+      - /bin/sh
+      - -c
+      - |
+        echo " ---> Go to the Exec panel and type START" 
+        sleep infinity
+    stdin_open: true 
+    tty: true
+    volumes:
+      - ./CONFIDENTIAL_investigators:/data/
+      - ./step3_model_design/files:/files/
+    container_name: Step3_Model_design
+
+  step4:
+    build: step4_beast_analysis/
+    entrypoint: 
+      - /bin/sh
+      - -c
+      - |
+        echo " ---> Go to the Exec panel and type START" 
+        sleep infinity
+    stdin_open: true 
+    tty: true
+    volumes:
+      - ./CONFIDENTIAL_investigators:/data/
+      - ./step4_beast_analysis/files:/files/
+    container_name: Step4_BEAST2_analysis
+
+  step5:
+    build: step5_press_conference/
+    entrypoint: 
+      - /bin/sh
+      - -c
+      - |
+        echo " ---> Go to the Exec panel and type START" 
+        sleep infinity
+    stdin_open: true 
+    tty: true
+    volumes:
+      - ./CONFIDENTIAL_investigators:/data/
+      - ./step5_press_conference/files:/files/
+    container_name: FinalStep_Press_conference
+
+  # docker compose up -d

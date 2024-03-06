@@ -1,0 +1,53 @@
+#!/bin/sh
+
+
+echo "\n----------------------"
+echo "\e[94mDear investigators, we have exciting news!\n" | pv -qL 20
+
+
+echo "Our field epi vet team were able to take some samples from 174 beavers. We sent them to the sequencing lab and we have the results back!" | pv -qL 40 
+
+cat /files/ascii_dna.txt
+
+
+while true; do
+    read -p "Would you like to look at the genetic sequences? (y/n) " yn
+        case $yn in
+            [Yy]* )  cp /files/beaver_10_164_na.fasta  /data/; echo "\nYou can find the FASTA file with the sequences in your CONFIDENTIAL folder. Just double click in the file for a quick visualization.";
+                     break;;
+            [Nn]* ) echo "\nOk. Are then you ready for the press conference? They want answers to the origin and speed of disease transmission of MOO-vi. Continue to step 7."; exit;;
+            * ) echo "\nPlease answer yes or no.";;
+        esac
+done
+
+echo "So this is what genetic sequences look like" | pv -qL 40 
+
+cat /files/toy_example.fasta
+
+echo "We have a total of "; grep -c "^>" /files/beaver_10_264_na.fasta; echo " sequences." 
+echo "The sequences are stored in a FASTA file, as you can see in this format you have the sequence name (sequence_id|host|date) following the > and the sequence of nucleotides below."
+
+echo "We are interested in the similarity between the sequences. More similar sequences are more likely to be part of the same transmission cluster. 
+      \nFor example. we would like to compare those originating from camels with those from humans. To achieve this, first, we must align the sequences to enable a meaningful comparison of nucleotide sites. "
+while true; do
+    read -p "Would you like us to align the sequences? (y/n) " yn
+    # Full alignemnt  will take around 15 min, running a small dataset with only 100 nt
+        case $yn in
+            [Yy]* )  echo "\n We will use MAFFT, a common software alignment to run the multiple sequence alignment.\e[0m";
+                     "/usr/local/bin/mafft" --thread 8 --auto "/files/beaver_10_164_na.fasta" > "/data/aligned_small.fasta";
+            echo "\n\e[94mYou can find the FASTA file with the sequences in your CONFIDENTIAL folder. Just double click in the file for a quick visualization.";
+                     break;;
+            [Nn]* ) echo "\nOk. Are then you ready for the press conference? They want answers to the origin and speed of disease transmission of MOO-vi. Continue to step 7."; exit;;
+            * ) echo "\nPlease answer yes or no.";;
+        esac
+done
+
+echo "Analysis faster than usual."
+echo "Cleaning Completeness, sequencing errors masking certain positions..."
+# Share histogram with completeness data, ask for percentage to filter
+# Filter with R script
+
+echo ""
+
+echo "\nYeah, the genetic sequences are ready! Before moving to step 3, let's share some information about the phylodynamic framework.";
+echo "\e[0m" 

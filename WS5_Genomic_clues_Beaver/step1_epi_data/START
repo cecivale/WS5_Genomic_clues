@@ -1,0 +1,46 @@
+#!/bin/sh
+
+
+echo "\n----------------------"
+echo "\e[94mWelcome investigators!\n" | pv -qL 20
+
+
+echo "We have received several reports of a new disease occurring in beavers. \nIt appears that the disease is quickly spreading across Sweden and is highly letal, which is concerning. \nWe need your expertise to better understand the transmission dynamics of the disease!" | pv -qL 40 
+
+cat /files/ascii_moose.txt
+
+
+while true; do
+    read -p "Are you ready to tackle the challenge of unraveling the transmission dynamics of this new disease? (y/n) " yn
+        case $yn in
+            [Yy]* ) echo "\nFantastic! We knew we could count on you.";
+                    echo "Our surveillance team has been working on the analysis of the reported case counts."; break;;
+            [Nn]* ) echo "\nOh, how bad, you were recommended as the best team for this job. We will have to find other investigators. Goodbye!"; exit;;
+            * ) echo "\nPlease, answer yes or no.";;
+        esac
+done
+
+echo "\n";
+
+while true; do
+    read -p "Do you wish to have a look at the reported data so far? (y/n) " yn
+        case $yn in
+            [Yy]* ) cp /files/fig1_beaver.pdf  /data/; echo "\nPlease, go to the CONFIDENTIAL_investigators folder to open the spatio-temporal plot created by the veterinary services in charge of the surveillance.";
+                    echo "\nCan you guess the role that moose and humans play in the spread of this new disease?"; break;;
+            [Nn]* ) echo "\nPlease, start step 1 to continue."; exit;;
+            * ) echo "\nPlease, answer yes or no.";;
+        esac
+done
+
+echo "\n";
+
+while true; do
+    read -p "Do you wish to dig deeper into who infected whom? (y/n) " yn
+        case $yn in
+            [Yy]* ) echo "\nBefore you move onto step 2, let's introduce you the concept of genetic diversity and evolution."; break;;
+            [Nn]* ) echo "\nOh come on!."; exit;;
+            * ) echo "\nPlease, answer yes or no.";;
+        esac
+done
+
+echo "\e[0m" 
