@@ -1,0 +1,29 @@
+#!/bin/sh
+
+
+echo "\n----------------------"
+export PATH_TO_FX=/usr/share/openjfx/lib
+alias beast="java --module-path $PATH_TO_FX --add-modules javafx.controls -jar /files/BDMM-Prime.jar"
+
+echo "\e[94mHello investigators, we are the Phylodynamics team.\n" | pv -qL 20
+
+
+echo "Now, let’s run the analysis " | pv -qL 40 
+
+while true; do
+    read -p "Type Yes to start the analysis" yn
+        case $yn in
+            [Yy]* )  echo "\n We will use BEAST2. \e[0m";
+                     beast /files/example.xml;
+            echo "\n\e[94mYou can find the results of the analysis in your CONFIDENTIAL folder. Open with tracer and the tree.";
+                     break;;
+            [Nn]* ) echo "\nOk. Are then you ready for the press conference? They want answers to the origin and speed of disease transmission of MOO-vi. Continue to step 7."; exit;;
+            * ) echo "\nPlease answer yes or no.";;
+        esac
+done
+
+
+echo "\nPlease, continue to the final step.";
+echo "\e[0m" 
+
+
