@@ -27,7 +27,7 @@ echo "\n";
 while true; do
     read -p "Do you wish to have a look at the reported data so far? (y/n) " yn
         case $yn in
-            [Yy]* ) cp /files/fig1_merscov.pdf  /data/; echo "\nPlease, go to the CONFIDENTIAL_investigators folder to open the spatio-temporal plot created by the veterinary services in charge of the surveillance.";
+            [Yy]* ) cp /files/Figure_step1_moose.pdf  /data/; echo "\nPlease, go to the CONFIDENTIAL_investigators folder to open the spatio-temporal plot created by the veterinary services in charge of the surveillance.";
                     echo "\nCan you guess the role that moose and humans play in the spread of this new disease?"; break;;
             [Nn]* ) echo "\nPlease, start step 1 to continue."; exit;;
             * ) echo "\nPlease, answer yes or no.";;
