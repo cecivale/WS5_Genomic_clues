@@ -11,6 +11,7 @@ echo "We have received several reports of a new disease occurring in moose and h
 
 cat /files/ascii_moose.txt
 
+echo "\n";
 
 while true; do
     read -p "Are you ready to tackle the challenge of unraveling the transmission dynamics of this new disease? (y/n) " yn
@@ -34,15 +35,9 @@ while true; do
         esac
 done
 
-echo "\n";
+echo "\nPress any key to continue...\n"
+read continue
 
-while true; do
-    read -p "Do you wish to dig deeper into who infected whom? (y/n) " yn
-        case $yn in
-            [Yy]* ) echo "\nBefore you move onto step 2, let's introduce you the concept of genetic diversity and evolution."; break;;
-            [Nn]* ) echo "\nOh come on!."; exit;;
-            * ) echo "\nPlease, answer yes or no.";;
-        esac
-done
+echo "Before you move onto step 2, let's introduce you the concept of genetic diversity and evolution." | pv -qL 40
 
 echo "\e[0m" 
