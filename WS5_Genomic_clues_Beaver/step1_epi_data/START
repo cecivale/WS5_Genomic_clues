@@ -7,7 +7,7 @@ echo "\e[94mWelcome investigators!\n" | pv -qL 20
 
 echo "We have received several reports of a new disease occurring in beavers. \nIt appears that the disease is quickly spreading across Sweden and is highly letal, which is concerning. \nWe need your expertise to better understand the transmission dynamics of the disease!" | pv -qL 40 
 
-cat /files/ascii_moose.txt
+cat /files/ascii_beaver.txt
 
 
 while true; do
@@ -25,7 +25,7 @@ echo "\n";
 while true; do
     read -p "Do you wish to have a look at the reported data so far? (y/n) " yn
         case $yn in
-            [Yy]* ) cp /files/fig1_beaver.pdf  /data/; echo "\nPlease, go to the CONFIDENTIAL_investigators folder to open the spatio-temporal plot created by the veterinary services in charge of the surveillance.";
+            [Yy]* ) cp /files/Figure_step1_beaver.pdf  /data/; echo "\nPlease, go to the CONFIDENTIAL_investigators folder to open the spatio-temporal plot created by the veterinary services in charge of the surveillance.";
                     echo "\nCan you guess the role that moose and humans play in the spread of this new disease?"; break;;
             [Nn]* ) echo "\nPlease, start step 1 to continue."; exit;;
             * ) echo "\nPlease, answer yes or no.";;
