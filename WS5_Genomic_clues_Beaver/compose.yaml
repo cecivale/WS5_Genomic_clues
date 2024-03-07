@@ -11,7 +11,7 @@ services:
       - ./CONFIDENTIAL_investigators:/data/
       - ./step1_epi_data/files:/files/
       - ./step1_epi_data:/app/
-    container_name: BStep1_Epi_data
+    container_name: B_Step1_Epi_data
 
   step2:
     build: step2_sequencing/
@@ -27,7 +27,7 @@ services:
       - ./CONFIDENTIAL_investigators:/data/
       - ./step2_sequencing/files:/files/
       - ./step2_sequencing:/app/
-    container_name: BStep2_Sequencing
+    container_name: B_Step2_Sequencing
 
   step3:
     build: step3_model_design/
@@ -43,7 +43,7 @@ services:
       - ./CONFIDENTIAL_investigators:/data/
       - ./step3_model_design/files:/files/
       - ./step3_model_design:/app/
-    container_name: BStep3_Model_design
+    container_name: B_Step3_Model_design
 
   step4:
     build: step4_beast_analysis/
@@ -59,7 +59,7 @@ services:
       - ./CONFIDENTIAL_investigators:/data/
       - ./step4_beast_analysis/files:/files/
       - ./step4_beast_analysis:/app/
-    container_name: BStep4_BEAST2_analysis
+    container_name: B_Step4_BEAST2_analysis
 
   step5:
     build: step5_press_conference/
@@ -75,6 +75,6 @@ services:
       - ./CONFIDENTIAL_investigators:/data/
       - ./step5_press_conference/files:/files/
       - ./step5_press_conference:/app/
-    container_name: BStep5_Press_conference
+    container_name: B_Step5_Press_conference
 
   # docker compose up -d

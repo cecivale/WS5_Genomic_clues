@@ -5,28 +5,29 @@ echo "\n----------------------"
 export PATH_TO_FX=/usr/share/openjfx/lib
 alias beast="java --module-path $PATH_TO_FX --add-modules javafx.controls -jar /files/BDMM-Prime.jar"
 
-echo "\e[94mHello investigators, we are the Phylodynamics team.\n" | pv -qL 20
+echo "\e[94mHello investigators, we are the BEAST2 team, ready to help you run your phylodynamic analysis with our software.\n" | pv -qL 20
 
 
-echo "Now, let’s run our phylodynamic analysis." | pv -qL 40 
+echo "Now that you have defined your phylodynamic framework, let’s run your analysis." | pv -qL 40 
 
 while true; do
-    read -p "Type Yes to start the analysis" yn
+    read -p "Ready to start your analysis? (y/n) " yn
         case $yn in
-            [Yy]* )  echo "\n We will use BEAST2. \e[0m";
+            [Yy]* )  echo "\nBelow you will see BEAST2 running your analysis. \e[0m";
                      beast /files/beaver.xml;
-            echo "\n\e[94mYou can find the results of the analysis in your CONFIDENTIAL folder. First, open the file Figure_beaver_mcc_tree1.tiff";
-                     break;;
-            [Nn]* ) echo "\nOk. Are then you ready for the press conference? They want answers to the origin and speed of disease transmission of MOO-vi. Continue to step 7."; exit;;
+            echo "\n\e[94mPlease, go to the CONFIDENTIAL_investigators folder to access the inferred posterior trees and parameters from your analysis. First, have a look at the two pdf files provided, both shows the same summary tree from your inferred posterior trees. However, one displays the sequence labels, while the other displays colored branches based on the molecular clock rate."; 
+            echo "\nBased on the summary tree, which conclusions can you draw about the transmission dynamics of the disease between beavers?"; break;;
+            [Nn]* ) echo "\nOk. Are then you ready for the press conference? They want answers about the transmission dynamics of the disease between beavers. Continue to step 5."; exit;;
             * ) echo "\nPlease answer yes or no.";;
         esac
 done
 
-echo "This is referred to as the maximum clade credibility or MCC tree. It is an estimate of the total probability of the given tree topology. Each tip represents a sequence and the branches...
-      Can you make conclusions about the transmission dynamics of the disease between beavers?" | pv -qL 40 
+echo "\nPress any key to continue...\n"
+read continue
 
+echo "Now open Tracer... xxxx" | pv -qL 40 
 
-echo "\nPlease, continue to the final step.";
+echo "\nPlease, continue to the final step to report your conclusions to the press conference ;-)";
 echo "\e[0m" 
 
 
