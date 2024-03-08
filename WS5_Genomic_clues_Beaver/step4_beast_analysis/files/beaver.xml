@@ -19,14 +19,14 @@
     :beast.base.inference.operator
     :beast.base.evolution.sitemodel
     :beast.base.evolution.substitutionmodel
-    :beast.base.evolution.likelihood" required="BEAST.base v2.7.6:BDMM-Prime v1.0.0-pre:ORC v1.1.2:BEASTLabs v2.0.2:SA v2.1.1" version="2.7">
+    :beast.base.evolution.likelihood" version="2.7">
 
 
 <!-- Alignment -->
     <data
 id="beaver_164_a"
 spec="feast.fileio.AlignmentFromFasta"
-fileName = "beaver_164_a.fasta"
+fileName = "/files/beaver_164_a.fasta"
 name="alignment"/>
 
 
@@ -270,13 +270,6 @@ name="alignment"/>
             <operator id="ORCNER_dAE_dBE_dCE.c:beaver_164_a" spec="orc.ner.NEROperator_dAE_dBE_dCE" rates="@ORCRates.c:beaver_164_a" tree="@Tree.t:beaver_164_a" weight="1.0"/>
             <metric id="RNNIMetric.0" spec="beastlabs.evolution.tree.RNNIMetric" taxonset="@TaxonSet.beaver_164_a"/>
         </operator>
-        <operator id="BDMMPrimeLeafToSA.t:beaver_164_a" spec="sa.evolution.operators.LeafToSampledAncestorJump" tree="@Tree.t:beaver_164_a" weight="10.0"/>
-        <operator id="BDMMPrimeSAWilsonBalding.t:beaver_164_a" spec="sa.evolution.operators.SAWilsonBalding" tree="@Tree.t:beaver_164_a" weight="10.0"/>
-        <operator id="BDMMPrimeSAWide.t:beaver_164_a" spec="sa.evolution.operators.SAExchange" isNarrow="false" tree="@Tree.t:beaver_164_a" weight="10.0"/>
-        <operator id="BDMMPrimeSANarrow.t:beaver_164_a" spec="sa.evolution.operators.SAExchange" tree="@Tree.t:beaver_164_a" weight="10.0"/>
-        <operator id="BDMMPrimeSAUniformOperator.t:beaver_164_a" spec="sa.evolution.operators.SAUniform" tree="@Tree.t:beaver_164_a" weight="20.0"/>
-        <operator id="BDMMPrimeSATreeRootScaler.t:beaver_164_a" spec="sa.evolution.operators.SAScaleOperator" rootOnly="true" scaleFactor="0.95" tree="@Tree.t:beaver_164_a" weight="1.0"/>
-        <operator id="BDMMPrimeSATreeScaler.t:beaver_164_a" spec="sa.evolution.operators.SAScaleOperator" scaleFactor="0.95" tree="@Tree.t:beaver_164_a" weight="3.0"/>
         <operator id="originBDMMPrimeScaler.t:beaver_164_a" spec="ScaleOperator" parameter="@originBDMMPrime.t:beaver_164_a" weight="3.0"/>
         <!--<operator id="typeFrequenciesExchanger.t:beaver_164_a" spec="operator.DeltaExchangeOperator" delta="0.1" weight="1.0">
             <parameter idref="typeFrequencies.t:beaver_164_a"/>
