@@ -5,16 +5,16 @@ echo "\n----------------------"
 echo "\e[94mWelcome investigators!\n" | pv -qL 20
 
 
-echo "We have received several reports of a new disease occurring in beavers. 
-      \nIt appears that the disease is quickly spreading across Sweden and is highly letal, which is concerning. 
-      \nWe need your expertise to better understand the transmission dynamics of the disease!" | pv -qL 40 
+echo "We need your help to understand the resurgence of BE-vi disease. Almost 10 years ago, thanks to the great efforts of our veterinary services, this highly infectious viral disease was eliminated from the Swedish beavers populations. However, as you may now, we have seen a resurgence of cases in the last 3 years. 
+      \nIt appears that the disease continues to spread quickly across Sweden and is highly letal, which is concerning. 
+      \nWe need your expertise to better understand the transmission dynamics of the disease! Could the old vaccine developed in 2015 be useful to control this new wave of cases?" | pv -qL 40 
 
 cat /files/ascii_beaver.txt
 
 echo "\n";
 
 while true; do
-    read -p "Are you ready to tackle the challenge of unraveling the transmission dynamics of this new disease? (y/n) " yn
+    read -p "Are you ready to tackle the challenge of unraveling the resurgence dynamics of BE-vi? (y/n) " yn
         case $yn in
             [Yy]* ) echo "\nFantastic! We knew we could count on you.";
                     echo "Our surveillance team has been working on the analysis of the reported case counts."; break;;
