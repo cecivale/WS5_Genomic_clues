@@ -13,21 +13,47 @@ echo "Now that you have defined your phylodynamic framework, let’s run your an
 while true; do
     read -p "Ready to start your analysis? (y/n) " yn
         case $yn in
-            [Yy]* )  echo "\nBelow you will see BEAST2 running your analysis. \e[0m";
+            [Yy]* )  echo "\nRunning BEAST2... \e[0m";
                      beast /files/beaver.xml;
-            echo "\n\e[94mPlease, go to the CONFIDENTIAL_investigators folder to access the inferred posterior trees and parameters from your analysis. First, have a look at the two pdf files provided, both shows the same summary tree from your inferred posterior trees. However, one displays the sequence labels, while the other displays colored branches based on the molecular clock rate."; 
-            echo "\nBased on the summary tree, which conclusions can you draw about the transmission dynamics of the disease between beavers?"; break;;
-            [Nn]* ) echo "\nOk. Are then you ready for the press conference? They want answers about the transmission dynamics of the disease between beavers. Continue to step 5."; exit;;
+            echo "\n\e[94mAnalysis completed! Above you will see BEAST2 running your analysis."; 
+            echo "\nThe screen shows you XXX"; break;;
+            [Nn]* ) echo "\nOk. Are then you ready for the press conference to report your conclusions? Continue to step 5."; exit;;
             * ) echo "\nPlease answer yes or no.";;
         esac
 done
 
-echo "\nPress any key to continue...\n"
+echo "\nPress any key to continue..."
 read continue
 
-echo "Now open Tracer... xxxx" | pv -qL 40 
+while true; do
+    read -p "Do you want to take a closer look a the inferred posterior trees? (y/n) " yn
+        case $yn in
+            [Yy]* )  cp /files/beaver_mcc_tree1.pdf  /data/; cp /files/beaver_mcc_tree2.pdf  /data/; echo "\nYou can access the files in your CONFIDENTIAL_investigators folder. The two files provided show the same summary tree from your inferred posterior trees. However, one displays the sequence labels, while the other displays colored branches based on the molecular clock rate.";
+                     echo "Based on the summary tree, which conclusions can you draw about the transmission dynamics of the disease between beavers?"; break;;
+            [Nn]* ) echo "\nOk. Are then you ready for the press conference to report your conclusions? Continue to step 5."; exit;;
+            * ) echo "\nPlease answer yes or no.";;
+        esac
+done
 
-echo "\nPlease, continue to the final step to report your conclusions to the press conference ;-)";
+
+echo "\nPress any key to continue..."
+read continue
+
+while true; do
+    read -p "Now, do you want to take a closer look a the inferred posterior model parameters? (y/n) " yn
+        case $yn in
+            [Yy]* )  cp /files/beaver.log  /data/; echo "\nYou can access the log file with the inferred parameters in your CONFIDENTIAL_investigators folder. Open it with Tracer software.";
+                     echo "On the left panel, you will see XXXX"; break;;
+            [Nn]* ) echo "\nOk. Are then you ready for the press conference to report your conclusions? Continue to step 5."; exit;;
+            * ) echo "\nPlease answer yes or no.";;
+        esac
+done
+
+echo "\nPress any key to continue..."
+read continue
+
+
+echo "\nWell, it seems that now you have all information inferred from your genetic sequences to report your conclusions to the press conference, continue to the final step ;-)";
 echo "\e[0m" 
 
 

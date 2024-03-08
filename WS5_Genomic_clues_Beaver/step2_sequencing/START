@@ -20,34 +20,45 @@ while true; do
         esac
 done
 
+echo "\nPress any key to continue..."
+read continue
+
 echo "So this is what genetic sequences look like" | pv -qL 40 
 
 cat /files/toy_example.fasta
 
-echo "We have a total of "; grep -c "^>" /files/beaver_10_264_na.fasta; echo " sequences." 
-echo "The sequences are stored in a FASTA file, as you can see in this format you have the sequence name (sequence_id|host|date) following the > and the sequence of nucleotides below."
+echo "\nWe have a total of 174 sequences which are stored in a FASTA file. As you can see in this format you have the sequence name (sequence_id|host|date) following the > and the sequence of nucleotides below.
+      \nWe are interested in the similarity between the sequences. More similar sequences are more likely to be part of the same transmission cluster. 
+      \nTo achieve this, first, we must align the sequences to enable a meaningful comparison of nucleotide sites." | pv -qL 40 
 
-echo "We are interested in the similarity between the sequences. More similar sequences are more likely to be part of the same transmission cluster. 
-      \nFor example. we would like to compare those originating from camels with those from humans. To achieve this, first, we must align the sequences to enable a meaningful comparison of nucleotide sites. "
+echo "\n";
+
 while true; do
     read -p "Would you like us to align the sequences? (y/n) " yn
     # Full alignemnt  will take around 15 min, running a small dataset with only 100 nt
         case $yn in
-            [Yy]* )  echo "\n We will use MAFFT, a common software alignment to run the multiple sequence alignment.\e[0m";
+            [Yy]* )  echo "\nWe will use MAFFT, a common software alignment to run the multiple sequence alignment.\e[0m";
                      "/usr/local/bin/mafft" --thread 8 --auto "/files/beaver_10_164_na.fasta" > "/data/aligned_small.fasta";
-            echo "\n\e[94mYou can find the FASTA file with the sequences in your CONFIDENTIAL folder. Just double click in the file for a quick visualization.";
+            echo "\n\e[94mAlignment completed! You can find the FASTA file with the aligned sequences in your CONFIDENTIAL folder. Just double click in the file for a quick visualization.";
                      break;;
-            [Nn]* ) echo "\nOk. Are then you ready for the press conference? They want answers to the origin and speed of disease transmission of MOO-vi. Continue to step 7."; exit;;
+            [Nn]* ) echo "\nOk. Are then you ready for the press conference to report your conclusions? Continue to step 5."; exit;;
             * ) echo "\nPlease answer yes or no.";;
         esac
 done
 
-echo "Analysis faster than usual."
-echo "Cleaning Completeness, sequencing errors masking certain positions..."
+echo "\nCan you notice the difference compared to the unaligned sequences?" | pv -qL 40 
+
+echo "\nPress any key to continue...\n"
+read continue
+
+echo "Wait... It appears that some sequences are considerably shorter than others. Can you identify them?
+      \nThese shorter sequences might not be very informative for our analysis. Although there isn't a specific threshold length, we'll apply a percentage coverage filter to remove them." | pv -qL 40 
+
 # Share histogram with completeness data, ask for percentage to filter
 # Filter with R script
 
-echo ""
+echo "\nPress any key to continue...\n"
+read continue
 
-echo "\nYeah, the genetic sequences are ready! Before moving to step 3, let's share some information about the phylodynamic framework.";
+echo "\nGreat, the genetic sequences have been processed! Before proceeding to step 3, let's review some details about the phylodynamic framework.";
 echo "\e[0m" 
