@@ -20,6 +20,7 @@ t <- bind_rows(t_l)
 # Plot histogram of missing nucleotides
 ggplot(t) +
   geom_histogram(aes(n)) +
+  geom_vline(aes(xintercept = 0.1 * length(aln[[1]])), linetype = 2) +
   theme_minimal() +
   ylab("Number of sequences") +
   xlab("Number of missing nucleotides in the sequence")

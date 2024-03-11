@@ -1,8 +1,8 @@
 library(ape)
 library(tidyverse)
-libarry(stringr)
+library(stringr)
 
-seqs <- read.FASTA("/Users/ceciliav/Documents/conferences/SVEPM/2024 Uppsala/WS5_Genomic_clues/WS5_Genomic_clues_Beaver/step2_sequencing/files/beaver_sequences_v0.fasta")
+seqs <- read.FASTA("WS5_Genomic_clues/WS5_Genomic_clues_Beaver/step2_sequencing/files/beaver_sequences_v0.fasta")
 seqs_labels <- tibble(original = names(seqs),
                       id = str_split(original, "\\|", simplify = TRUE)[,1],
                       sp = str_split(original, "\\|", simplify = TRUE)[,2],
@@ -24,4 +24,4 @@ ggplot(seqs_labels) +
 
 names(seqs) <- seqs_labels$new
 
-write.FASTA(seqs, "/Users/ceciliav/Documents/conferences/SVEPM/2024 Uppsala/WS5_Genomic_clues/WS5_Genomic_clues_Beaver/step2_sequencing/files/beaver_sequences.fasta")
+write.FASTA(seqs, "WS5_Genomic_clues/WS5_Genomic_clues_Beaver/step2_sequencing/files/beaver_sequences.fasta")

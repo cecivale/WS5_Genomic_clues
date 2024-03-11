@@ -13,7 +13,7 @@ cat /files/ascii_dna.txt
 while true; do
     read -p "Would you like to look at the genetic sequences? (y/n) " yn
         case $yn in
-            [Yy]* )  cp /files/moose_10_274_na.fasta  /data/; echo "\nYou can find the FASTA file with the sequences in your CONFIDENTIAL folder. Just double click in the file for a quick visualization.";
+            [Yy]* )  cp /files/moose_sequences.fasta  /data/; echo "\nYou can find the FASTA file with the sequences in your CONFIDENTIAL folder. Just double click in the file for a quick visualization.";
                      break;;
             [Nn]* ) echo "\nOk. Are then you ready for the press conference? They want answers to the origin and speed of disease transmission of MOO-vi. Continue to step 7."; exit;;
             * ) echo "\nPlease answer yes or no.";;
@@ -25,9 +25,9 @@ read continue
 
 echo "So this is what genetic sequences look like" | pv -qL 40 
 
-cat /files/toy_example.fasta
+cat /files/moose_toy_example.fasta
 
-echo "We have a total of 284 sequences.As you can see in this format you have the sequence name (sequence_id|host|date) following the > and the sequence of nucleotides below.
+echo "We have a total of 284 sequences of 30000 nucleotide length. As you can see in this format you have the sequence name (sequence_id|host|date) following the > and the sequence of nucleotides below.
       \nWe are interested in the similarity between the sequences. More similar sequences are more likely to be part of the same transmission cluster. 
       \nTo achieve this, first, we must align the sequences to enable a meaningful comparison of nucleotide sites." | pv -qL 40 
 
@@ -38,7 +38,8 @@ while true; do
     # Full alignemnt  will take around 15 min, running a small dataset with only 100 nt
         case $yn in
             [Yy]* )  echo "\n We will use MAFFT, a common software alignment to run the multiple sequence alignment.\e[0m";
-                     "/usr/local/bin/mafft" --thread 8 --auto "/files/moose_10_274_na.fasta" > "/data/aligned_small.fasta";
+                     "/usr/local/bin/mafft" --thread 8 --auto "/files/moose_sequences_short.fasta" > "/files/moose_aligned_short.fasta";
+                     cp /files/moose_aligned.fasta  /data/ ;
             echo "\n\e[94mAlignment completed! You can find the FASTA file with the sequences in your CONFIDENTIAL folder. Just double click in the file for a quick visualization.";
                      break;;
             [Nn]* ) echo "\nOk. Are then you ready for the press conference to report your conclusions? Continue to step 5."; exit;;
@@ -52,10 +53,13 @@ echo "\nPress any key to continue...\n"
 read continue
 
 echo "Wait... It appears that some sequences are considerably shorter than others. Can you identify them?
-      \nThese shorter sequences might not be very informative for our analysis. Although there isn't a specific threshold length, we'll apply a percentage coverage filter to remove them." | pv -qL 40 
+      \nThese shorter sequences might not be very informative for our analysis. We can have a quick look with R at the number of missing positions in our sequences (missing_positions.pdf plot and if you want to have a look at the code you can open the script filter_sequences.R)." | pv -qL 40; 
 
-# Share histogram with completeness data, ask for percentage to filter
-# Filter with R script
+
+echo "\nPress any key to continue...\n"
+read continue
+echo "Some sequences have a high percentage of missing nucleotides, we have filter those bad quality sequences, using 90% of genome completeness as threshold." | pv -qL 40 ;
+cp /files/moose_aligned_filtered.fasta  /data/ ;
 
 echo "\nPress any key to continue...\n"
 read continue

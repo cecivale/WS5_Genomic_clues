@@ -60,6 +60,7 @@ echo "Wait... It appears that some sequences are considerably shorter than other
 echo "\nPress any key to continue...\n"
 read continue
 echo "Some sequences have a high percentage of missing nucleotides, we have filter those bad quality sequences, using 90% of genome completeness as threshold." | pv -qL 40 ;
+cp /files/beaver_aligned_filtered.fasta  /data/ ;
 
 
 echo "\nPress any key to continue...\n"

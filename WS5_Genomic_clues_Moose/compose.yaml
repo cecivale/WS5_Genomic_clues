@@ -1,7 +1,7 @@
 services:
   step1:
     build: step1_epi_data/
-    command:
+    entrypoint:
       - /bin/sh
       - -c
       - |
@@ -15,7 +15,7 @@ services:
 
   step2:
     build: step2_sequencing/
-    command:
+    entrypoint:
       - /bin/sh
       - -c
       - |
