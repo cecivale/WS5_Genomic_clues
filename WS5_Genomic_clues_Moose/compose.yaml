@@ -61,20 +61,4 @@ services:
       - ./step4_beast_analysis:/app/
     container_name: M_Step4_BEAST2_analysis
 
-  step5:
-    build: step5_press_conference/
-    entrypoint: 
-      - /bin/sh
-      - -c
-      - |
-        echo " ---> Go to the Exec panel and type START" 
-        sleep infinity
-    stdin_open: true 
-    tty: true
-    volumes:
-      - ./CONFIDENTIAL_investigators:/data/
-      - ./step5_press_conference/files:/files/
-      - ./step5_press_conference:/app/
-    container_name: M_FinalStep_Press_conference
-
-  # docker compose up -d
+   # docker compose up -d

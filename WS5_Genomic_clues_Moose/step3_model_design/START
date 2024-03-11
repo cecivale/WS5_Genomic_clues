@@ -2,34 +2,58 @@
 
 
 echo "\n----------------------"
-echo "\e[94mWelcome investigators!\n" | pv -qL 20
+echo "\e[94mWelcome back investigators, thrilled that you are still with us.\n" | pv -qL 20
 
 
-echo "We have received several reports of a new disease in mooses The quick spread across Sweden and the high letality of the disease ...." | pv -qL 40 
+echo "Now that we have covered some basics of the phylodynamic framework components, let's define yours for this epidemic.
+\nUsually, we would use BEAUTI, an interface associated to the BEAST2 software, in which you can import data and set up phylodynamic analyses. However, mastering it can be quite time-consuming and with the conference this afternoon, time is tight. So let's keep it old school and work with paper sheets ;-)" | pv -qL 40 
 
-cat /files/ascii_moose.txt
-
+echo "\n";
 
 while true; do
-    read -p "Are you ready to take the challenge of unraveling the transmission dynamics of this new disease? (y/n) " yn
+    read -p "Can you see the paper sheets on your table? (y/n) " yn
         case $yn in
-            [Yy]* ) echo "\nGreat! We knew we could count on you.";
-                    echo "Our surveillance team has been working on the analysis of the reported case counts. "; break;;
-            [Nn]* ) echo "\nOh, how bad, you were recommended as the best team for this job. We will have to find other investigators. Goodbye!"; exit;;
+            [Yy]* ) echo "\nGreat! Each sheet represents a component of a phylodynamic framework.";
+                    echo "Now that you got some background, you will try to link them together. "; break;;
+            [Nn]* ) echo "\nMhumm, are you sure? Take a closer look, they are right there."; exit;;
             * ) echo "\nPlease answer yes or no.";;
         esac
 done
 
 echo "\n";
 
+echo "You should have the following paper sheets:
+\n- Orange: data components - alignment, sequence, sample type, sample dates.
+\n- Blue: Model components - substitution model, molecular clock model and multi-type birth-death model.
+\n- Green: Parameter components - origin, sampling proportion, becoming unifectious rate, etc.
+\n- White: Definitions corresponding to the different components. " | pv -qL 40 
+
+echo "\nPress any key to continue..."
+read continue
+
+echo "Let's start by matching the model components to their definition by adding the definition inside the corresponding paper sheets. Ready, go!" | pv -qL 40 
+
+echo "\nPress any key to continue..."
+read continue
+
+echo "Now, let's complete the missing links that connect all those components. Some have already been linked, try to find and link the missing ones. Ready, go!" | pv -qL 40 
+
+echo "\nPress any key to continue..."
+read continue
+
 while true; do
-    read -p "Do you wish to have a look at the reported data so far? (y/n) " yn
+    read -p "Do you wish to see the answer? (y/n) " yn
         case $yn in
-            [Yy]* ) cp /files/fig1_merscov.pdf  /data/; echo "\nYou just receive the temporal and spatial plots made by the veterinary services in charge of the surveillance. Please, go to the CONFIDENTIAL_investigators folder to open the files.";
-                    echo "\nCan you guess the role that mooses and humans play in the spread of this new disease? Continue to step 1."; break;;
-            [Nn]* ) echo "\nPlease, start step 1 to continue."; exit;;
+            [Yy]* ) cp /files/Figure_model_moose.pdf  /data/; echo "\nHere is what your phylodynamic framework should look like.";
+                    echo "\nXXX."; break;;
+            [Nn]* ) echo "\nAre you sure? Let's move on to step 4 to run this phylodynamic analysis."; exit;;
             * ) echo "\nPlease answer yes or no.";;
         esac
 done
 
+echo "\nPress any key to continue..."
+read continue
+
+
+echo "\nCongrats! Your phylodynamic framework is complete! Before moving onto step 4 to run your phylodynamic analysis, let's discuss prior and Bayesian inferences.";
 echo "\e[0m" 
