@@ -10,14 +10,16 @@ echo "\e[94mHello investigators, we are the BEAST2 team, ready to help you run y
 
 echo "Now that you have defined your phylodynamic framework, let’s run your analysis." | pv -qL 40 
 
+echo "\n";
+
 while true; do
     read -p "Ready to start your analysis? (y/n) " yn
         case $yn in
             [Yy]* )  echo "\nRunning BEAST2... \e[0m";
                      beast /files/beaver.xml;
             echo "\n\e[94mAnalysis completed! Above you will see BEAST2 running your analysis."; 
-            echo "\nThe screen shows you XXX"; break;;
-            [Nn]* ) echo "\nOk. Are then you ready for the press conference to report your conclusions? Continue to step 5."; exit;;
+            echo "\nThe screen shows parameters sampled every 100 steps from the joint posterior distributions, including the effective reproduction number, the become uninfectious rate, etc. Close to the end of the list, you will find estimates of the time it takes per million samples."; break;;
+            [Nn]* ) echo "\nOk. Be ready for the press conference to report your conclusions."; exit;;
             * ) echo "\nPlease answer yes or no.";;
         esac
 done
@@ -28,9 +30,10 @@ read continue
 while true; do
     read -p "Do you want to take a closer look a the inferred posterior trees? (y/n) " yn
         case $yn in
-            [Yy]* )  cp /files/beaver_mcc_tree1.pdf  /data/; cp /files/beaver_mcc_tree2.pdf  /data/; echo "\nYou can access the files in your CONFIDENTIAL_investigators folder. The two files provided show the same summary tree from your inferred posterior trees. However, one displays the sequence labels, while the other displays colored branches based on the molecular clock rate.";
-                     echo "Based on the summary tree, which conclusions can you draw about the transmission dynamics of the disease between beavers?"; break;;
-            [Nn]* ) echo "\nOk. Are then you ready for the press conference to report your conclusions? Continue to step 5."; exit;;
+            [Yy]* )  cp /files/beaver_mcc_tree1.pdf  /data/; cp /files/beaver_mcc_tree2.pdf  /data/; echo "\nYou can access the files in your CONFIDENTIAL_investigators folder. The two files provided show the same summary tree from your inferred posterior trees. However, one displays the sequence labels, while the other displays colored branches based on the molecular clock rate.
+                        \nEach tip represents a sampled sequence, and each branch represents the estimated evolutionary relationship between sequences over time.";
+                     echo "\nBased on the summary tree, which conclusions can you draw about the transmission dynamics of the disease between beavers?"; break;;
+            [Nn]* ) echo "\nOk. Be ready for the press conference to report your conclusions."; exit;;
             * ) echo "\nPlease answer yes or no.";;
         esac
 done
@@ -40,11 +43,12 @@ echo "\nPress any key to continue..."
 read continue
 
 while true; do
-    read -p "Now, do you want to take a closer look a the inferred posterior model parameters? (y/n) " yn
+    read -p "Now, do you want to take a closer look at the inferred posterior model parameters? (y/n) " yn
         case $yn in
             [Yy]* )  cp /files/beaver.log  /data/; echo "\nYou can access the log file with the inferred parameters in your CONFIDENTIAL_investigators folder. Open it with Tracer software.";
-                     echo "On the left panel, you will see XXXX"; break;;
-            [Nn]* ) echo "\nOk. Are then you ready for the press conference to report your conclusions? Continue to step 5."; exit;;
+                     echo "\nOn the left panel, you will see the list of parameters of your phylodynamic framework and their mean posterior estimates. The Effective Sample Size (ESS) is the number of effectively independent samples from the posterior distribution that the Markov chain is equivalent to. If the ESS of a parameter is small then the estimate of the posterior distribution of that parameter will be poor. 
+                     \nOn the right panel, you can have a look at estimates tab, which describes the parameter estimate distribution. Additionally, you can explore the marginal density tab and the joint-marginal tab, which provide further insights into the parameter distributions and relationships between parameters."; break;;
+            [Nn]* ) echo "\nOk. Be ready for the press conference to report your conclusions."; exit;;
             * ) echo "\nPlease answer yes or no.";;
         esac
 done
@@ -53,7 +57,7 @@ echo "\nPress any key to continue..."
 read continue
 
 
-echo "\nWell, it seems that now you have all information inferred from your genetic sequences to report your conclusions to the press conference, continue to the final step ;-)";
+echo "\nWell, it seems that now you have all information inferred from your genetic sequences to report your conclusions, ready for the press conference? ;-)";
 echo "\e[0m" 
 
 
