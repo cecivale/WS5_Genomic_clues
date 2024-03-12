@@ -7,8 +7,51 @@ alias beast="java --module-path $PATH_TO_FX --add-modules javafx.controls -jar /
 
 echo "\e[94mHello investigators, we are the BEAST2 team, ready to help you run your phylodynamic analysis with our software.\n" | pv -qL 20
 
+echo "Now that you have defined your phylodynamic framework, let’s define priors for some of your parameters." | pv -qL 40 
 
-echo "Now that you have defined your phylodynamic framework, let’s run your analysis." | pv -qL 40 
+echo "\nSince it looks like there was a resurgence of cases in the last 3 years, maybe we should have a look at how the virus evolved over time between the two phases of the epidemic. Let's have some thoughts about the molecular clock model. If you did well on the previous step, you should have understood that the molecular clock rate is a model describing the nucleotide evolutionary rates along the branches of the phylogeny.
+
+Which of the following priors would you use for the clock rate? (a/b/c)
+ (a) A relaxed clock with rate uniformly distributed between -infinity and infinity
+ (b) A relaxed clock with rate with average 10^-5 substitution/site/year 
+ (c) A strict clock"  | pv -qL 40
+
+while true; do
+    read -p "Your choice: " choice
+    case $choice in
+        [Aa]* ) echo "Wrong! That's an improper prior, meaning that the sum or the integral of the prior values does not converge. Try again!";;
+        [Bb]* ) echo "Right! We will use a relaxed molecular clock model, meaning that the phylogeny branches will have independent clock rate distributions with a lognormal distribution that allows for some variation."; break;;
+        [Cc]* ) echo "Wrong! Because we would like to allow for variability since 10 years passed, so we will use an uncorrelated molecular clock model, meaning that the phylogeny branches will have independent clock rate distributions. Try again!";;
+        * ) echo "Please choose between a, b, or c.";;
+    esac
+done
+
+echo "\nPress any key to continue..."
+read continue
+
+echo "In general, it is a good practice to fix one parameter of the multi-type birth-death (MTBD) model for identifiability. If you did well on the previous step, you should have understood that the MTBD model is a transmission model describing the process of generating the phylogeny.
+
+We just receive information from the experimental lab staff that the beavers they experimentally infected remained infectious on average for 45 days, so let's fix the becoming uninfectious rate to a given value based on this information. 
+
+Which of the following values would you use for the becoming uninfectious rate prior? (a/b/c)
+ (a) 0.45
+ (b) 8
+ (c) 45" | pv -qL 40
+
+while true; do
+    read -p "Your choice: " choice
+    case $choice in
+        [Aa]* ) echo "Wrong! The becoming uninfectious rate is the reciprocal of the period of infectiousness, so it should be calculated as the number of days in a year (365) divided by the infectious period in days (45). Try again!";;
+        [Bb]* ) echo "Right! The becoming uninfectious rate is the reciprocal of the period of infectiousness, so it should be calculated as the number of days in a year (365) divided by the infectious period in days (45)."; break;;
+        [Cc]* ) echo "Wrong! The becoming uninfectious rate is the reciprocal of the period of infectiousness, so it should be calculated as the number of days in a year (365) divided by the infectious period in days (45). Try again!";;
+        * ) echo "Please choose between a, b, or c.";;
+    esac
+done
+
+echo "\nPress any key to continue..."
+read continue
+
+echo "Now that you have defined your priors (let's assume you have defined all of them, not only the two above ;-) ), let’s run your analysis." | pv -qL 40 
 
 echo "\n";
 
@@ -31,8 +74,8 @@ while true; do
     read -p "Do you want to take a closer look a the inferred posterior trees? (y/n) " yn
         case $yn in
             [Yy]* )  cp /files/beaver_mcc_tree1.pdf  /data/; cp /files/beaver_mcc_tree2.pdf  /data/; echo "\nYou can access the files in your CONFIDENTIAL_investigators folder. The two files provided show the same summary tree from your inferred posterior trees. However, one displays the sequence labels, while the other displays colored branches based on the molecular clock rate.
-                        \nEach tip represents a sampled sequence, and each branch represents the estimated evolutionary relationship between sequences over time.";
-                     echo "\nBased on the summary tree, which conclusions can you draw about the transmission dynamics of the disease between beavers?"; break;;
+                        \nEach tip represents a sampled sequence, and each branch represents the estimated evolutionary relationship between sequences over time." | pv -qL 40 ;
+                     echo "\nBased on the summary tree, which conclusions can you draw about the transmission dynamics of the disease between beavers?" | pv -qL 40 ; break;;
             [Nn]* ) echo "\nOk. Be ready for the press conference to report your conclusions."; exit;;
             * ) echo "\nPlease answer yes or no.";;
         esac
@@ -47,7 +90,7 @@ while true; do
         case $yn in
             [Yy]* )  cp /files/beaver.log  /data/; echo "\nYou can access the log file with the inferred parameters in your CONFIDENTIAL_investigators folder. Open it with Tracer software.";
                      echo "\nOn the left panel, you will see the list of parameters of your phylodynamic framework and their mean posterior estimates. The Effective Sample Size (ESS) is the number of effectively independent samples from the posterior distribution that the Markov chain is equivalent to. If the ESS of a parameter is small then the estimate of the posterior distribution of that parameter will be poor. 
-                     \nOn the right panel, you can have a look at estimates tab, which describes the parameter estimate distribution. Additionally, you can explore the marginal density tab and the joint-marginal tab, which provide further insights into the parameter distributions and relationships between parameters."; break;;
+                     \nOn the right panel, you can have a look at estimates tab, which describes the parameter estimate distribution. Additionally, you can explore the marginal density tab and the joint-marginal tab, which provide further insights into the parameter distributions and relationships between parameters." | pv -qL 40 ; break;;
             [Nn]* ) echo "\nOk. Be ready for the press conference to report your conclusions." | pv -qL 40 ; exit;;
             * ) echo "\nPlease answer yes or no.";;
         esac

@@ -45,7 +45,7 @@ while true; do
     read -p "Do you wish to see the answer? (y/n) " yn
         case $yn in
             [Yy]* ) cp /files/Figure_model_beaver.pdf  /data/; echo "\nHere is what your phylodynamic framework should look like.";
-                    echo "\nXXX."; break;;
+                    break;;
             [Nn]* ) echo "\nAre you sure? Let's move on to step 4 to run this phylodynamic analysis."; exit;;
             * ) echo "\nPlease answer yes or no.";;
         esac
