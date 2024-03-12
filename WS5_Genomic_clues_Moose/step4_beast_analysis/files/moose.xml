@@ -27,7 +27,7 @@
     <data
 id="moose_alignment_final"
 spec="feast.fileio.AlignmentFromFasta"
-fileName = "moose_aligned_filtered.fasta"
+fileName = "/data/moose_aligned_filtered.fasta"
 name="alignment"/>
 
     
@@ -52,7 +52,7 @@ name="alignment"/>
 
     <map name="OneOnX" >beast.base.inference.distribution.OneOnX</map>
 
-    <run id="mcmc" spec="MCMC" chainLength="50000000">
+    <run id="mcmc" spec="MCMC" chainLength="3000">
         <state id="state" spec="State" storeEvery="5000">
             <tree id="Tree.t:moose_alignment_final" spec="beast.base.evolution.tree.Tree" name="stateNode">
                 <trait id="dateTrait.t:moose_alignment_final" spec="feast.fileio.TraitSetFromTaxonSet" 
@@ -287,7 +287,7 @@ name="alignment"/>
             <log idref="rhoSamplingProbTPEpi.t:moose_alignment_final"/>
             <log idref="clockRate.c:moose_alignment_final"/>
         </logger>
-        <logger id="screenlog" spec="Logger" logEvery="1000">
+        <logger id="screenlog" spec="Logger" logEvery="100">
             <log idref="posterior"/>
             <log idref="likelihood"/>
             <log idref="prior"/>

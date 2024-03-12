@@ -26,7 +26,7 @@
     <data
 id="beaver_164_a"
 spec="feast.fileio.AlignmentFromFasta"
-fileName = "/files/beaver_164_a.fasta"
+fileName = "/data/beaver_aligned_filtered.fasta"
 name="alignment"/>
 
 

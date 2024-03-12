@@ -26,6 +26,8 @@ ggplot(t) +
   ylab("Number of sequences") +
   xlab("Number of missing nucleotides in the sequence")
 
+ggsave("missing_nucleotides.pdf", height = 10, width = 15, units = "cm")
+
 # Filter only sequences with more than 90% of the nucleotides
 t_filt <- t %>% filter(p >= 0.9)
 

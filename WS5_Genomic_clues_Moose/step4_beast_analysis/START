@@ -60,7 +60,8 @@ while true; do
         case $yn in
             [Yy]* )  echo "Running BEAST2... \e[0m";
                      beast /files/moose.xml;
-            echo "\n\e[94mAnalysis completed! Above you will see BEAST2 running your analysis."; 
+                     cp /files/moose.xml /data/;
+            echo "\n\e[94mAnalysis completed! Above you will see BEAST2 running your analysis.  And you can find the .xml document with your analysis definition that BEAST2 took as input in the CONFIDENTIAL folder."; 
             echo "\nThe screen shows parameters sampled every 100 steps from the joint posterior distributions, including the effective reproduction number, the become uninfectious rate, etc. Close to the end of the list, you will find estimates of the time it takes per million samples."; break;;
             [Nn]* ) echo "\nOk. Be ready for the press conference to report your conclusions."; exit;;
             * ) echo "\nPlease answer yes or no.";;
