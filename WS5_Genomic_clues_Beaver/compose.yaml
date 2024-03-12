@@ -8,8 +8,10 @@ services:
         echo " ---> Go to the Exec panel and type START" 
         sleep infinity
     volumes:
-      - ./CONFIDENTIAL_investigators:/data/
+      - /Desktop/CONFIDENTIAL_investigators:/data/
       - ./step1_epi_data/files:/files/
+      #- /Desktop/CONFIDENTIAL_investigators:/data/
+      ## - ./step1_epi_data/files:/files/
       - ./step1_epi_data:/app/
     container_name: B_Step1_Epi_data
 

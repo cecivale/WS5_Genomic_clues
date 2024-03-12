@@ -48,7 +48,7 @@ while true; do
             [Yy]* )  cp /files/beaver.log  /data/; echo "\nYou can access the log file with the inferred parameters in your CONFIDENTIAL_investigators folder. Open it with Tracer software.";
                      echo "\nOn the left panel, you will see the list of parameters of your phylodynamic framework and their mean posterior estimates. The Effective Sample Size (ESS) is the number of effectively independent samples from the posterior distribution that the Markov chain is equivalent to. If the ESS of a parameter is small then the estimate of the posterior distribution of that parameter will be poor. 
                      \nOn the right panel, you can have a look at estimates tab, which describes the parameter estimate distribution. Additionally, you can explore the marginal density tab and the joint-marginal tab, which provide further insights into the parameter distributions and relationships between parameters."; break;;
-            [Nn]* ) echo "\nOk. Be ready for the press conference to report your conclusions."; exit;;
+            [Nn]* ) echo "\nOk. Be ready for the press conference to report your conclusions." | pv -qL 40 ; exit;;
             * ) echo "\nPlease answer yes or no.";;
         esac
 done
@@ -58,6 +58,5 @@ read continue
 
 
 echo "\nWell, it seems that now you have all information inferred from your genetic sequences to report your conclusions, ready for the press conference? ;-)";
-echo "\e[0m" 
 
 
