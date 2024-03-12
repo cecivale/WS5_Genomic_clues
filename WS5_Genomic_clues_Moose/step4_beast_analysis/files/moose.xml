@@ -230,7 +230,7 @@ name="alignment"/>
 <!--         <operator id="gammaShapeScaler.s:moose_alignment_final" spec="AdaptableOperatorSampler" weight="0.05">
             <parameter idref="gammaShape.s:moose_alignment_final"/> -->
             <!-- <operator idref="AVMNOperator.moose_alignment_final"/> -->
-            <operator id="gammaShapeScalerX.s:moose_alignment_final" spec="kernel.BactrianScaleOperator" parameter="@gammaShape.s:moose_alignment_final" scaleFactor="0.5" upper="10.0" weight="0.1"/>
+            <operator id="gammaShapeScalerX.s:moose_alignment_final" spec="kernel.BactrianScaleOperator" parameter="@gammaShape.s:moose_alignment_final" scaleFactor="0.5" upper="10.0" weight="3"/>
         <!-- </operator> -->
 
         <operator id="BDMMPrimeTreeRootScaler" spec="BactrianScaleOperator" tree="@Tree.t:moose_alignment_final"  rootOnly="true" scaleFactor="0.25"  weight="5.0"/>
