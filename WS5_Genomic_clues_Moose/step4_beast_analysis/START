@@ -8,10 +8,53 @@ alias beast="java --module-path $PATH_TO_FX --add-modules javafx.controls -jar /
 echo "\e[94mHello investigators, we are the BEAST2 team, ready to help you run your phylodynamic analysis with our software.\n" | pv -qL 20
 
 
-echo "Now that you have defined your phylodynamic framework, let’s run your analysis." | pv -qL 40 
+echo "Now that you have defined your phylodynamic framework, let’s define priors for some of your parameters." | pv -qL 40 
+
+echo "\nSince it looks like there were human and moose cases over the last years, maybe we should have a look at how the virus transmitted over time between these two populations. Let's have some thoughts about the effective reproduction number. If you did well on the previous step, you should have understood that the effective reproduction number is the average number of secondary infections caused by an infected case within/between types.
+
+Which of the following priors would you use for the effective reproduction number within/between types? (a/b/c)
+ (a) A uniform distribution between -infinity and infinity
+ (b) A lognormal distribution with average of 1 
+ (c) A fixed value of 1"  | pv -qL 40
+
+while true; do
+    read -p "Your choice: " choice
+    case $choice in
+        [Aa]* ) echo "Wrong! That's an improper prior, meaning that the sum or the integral of the prior values does not converge. Try again!";;
+        [Bb]* ) echo "Right! This is a broad prior, reflecting our uncertainty about the effective reproduction number. It assumes that most values will be close to 1, but allows for variability."; break;;
+        [Cc]* ) echo "Wrong! This is a too strict prior, it will not allow for variability. Try again!";;
+        * ) echo "Please choose between a, b, or c.";;
+    esac
+done
+
+echo "\nPress any key to continue..."
+read continue
+
+echo "In general, it is a good practice to fix one parameter of the multi-type birth-death (MTBD) model for identifiability. If you did well on the previous step, you should have understood that the MTBD model is a transmission model describing the process of generating the phylogeny.
+
+We just receive information from the experimental lab staff that the moose they experimentally infected remained infectious on average for 7 days, so let's fix the becoming uninfectious rate to a given value based on this information. 
+
+Which of the following values would you use for the becoming uninfectious rate prior? (a/b/c)
+ (a) 7
+ (b) 52
+ (c) 0.52" | pv -qL 40
+
+while true; do
+    read -p "Your choice: " choice
+    case $choice in
+        [Aa]* ) echo "Wrong! The becoming uninfectious rate is the reciprocal of the period of infectiousness, so it should be calculated as the number of days in a year (365) divided by the infectious period in days (7). Try again!";;
+        [Bb]* ) echo "Right! The becoming uninfectious rate is the reciprocal of the period of infectiousness, so it should be calculated as the number of days in a year (365) divided by the infectious period in days (7)."; break;;
+        [Cc]* ) echo "Wrong! The becoming uninfectious rate is the reciprocal of the period of infectiousness, so it should be calculated as the number of days in a year (365) divided by the infectious period in days (7). Try again!";;
+        * ) echo "Please choose between a, b, or c.";;
+    esac
+done
+
+echo "\nPress any key to continue..."
+read continue
+
+echo "Now that you have defined your priors (let's assume you have defined all of them, not only the two above ;-) ), let’s run your analysis." | pv -qL 40 
 
 echo "\n";
-
 while true; do
     read -p "Ready to start your analysis? (y/n) " yn
         case $yn in
