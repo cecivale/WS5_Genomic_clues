@@ -69,12 +69,12 @@ name="alignment"/>
             <parameter id="kappa.s:moose_alignment_final" spec="parameter.RealParameter" lower="0.0" name="stateNode">2.0</parameter>
             <!-- <parameter id="freqParameter.s:moose_alignment_final" spec="parameter.RealParameter" dimension="4" lower="0.0" name="stateNode" upper="1.0">0.25</parameter> -->
             <parameter id="gammaShape.s:moose_alignment_final" spec="parameter.RealParameter" lower="0.1" name="stateNode">1.0</parameter>
-            <parameter id="originBDMMPrime.t:moose_alignment_final" spec="parameter.RealParameter" name="stateNode">10.0</parameter>
-            <parameter id="typeFrequencies.t:moose_alignment_final" spec="parameter.RealParameter" dimension="2" lower="0.0" name="stateNode" upper="1.0">0.5 0.5</parameter>
+            <parameter id="originMoovi" spec="parameter.RealParameter" name="stateNode">10.0</parameter>
+            <parameter id="typeFrequenciesOriginMoovi" spec="parameter.RealParameter" dimension="2" lower="0.0" name="stateNode" upper="1.0">0.5 0.5</parameter>
             <parameter id="R0Epi.t:moose_alignment_final" spec="parameter.RealParameter" lower="0.0" name="stateNode">1.0 1.0</parameter>
             <!--<parameter id="becomeUninfectiousRateEpi.t:moose_alignment_final" spec="parameter.RealParameter" lower="0.0" name="stateNode">1.0 1.0</parameter>-->
             <parameter id="samplingProportionEpi.t:moose_alignment_final" spec="parameter.RealParameter" dimension="4" lower="0.0" name="stateNode" upper="1.0">0.01 0.02 0.01 0.0 0.0 0.0</parameter>
-            <!--<parameter id="clockRate.c:moose_alignment_final" spec="parameter.RealParameter" lower="0.0" name="stateNode">5.0E-4</parameter>-->
+            <!--<parameter id="clockRateMoovi" spec="parameter.RealParameter" lower="0.0" name="stateNode">5.0E-4</parameter>-->
             <parameter id="R0AmongDemesEpi.t:moose_alignment_final" spec="parameter.RealParameter" lower="0.0" name="stateNode">1.0 1.0</parameter>
         </state>
         <init id="RandomTree.t:moose_alignment_final" spec="RandomTree" estimate="false" initial="@Tree.t:moose_alignment_final" taxa="@moose_alignment_final">
@@ -84,9 +84,9 @@ name="alignment"/>
         </init>
         <distribution id="posterior" spec="CompoundDistribution">
             <distribution id="prior" spec="CompoundDistribution">
-                <distribution id="BDMMPrime.t:moose_alignment_final" spec="bdmmprime.distribution.BirthDeathMigrationDistribution" conditionOnSurvival="false" frequencies="@typeFrequencies.t:moose_alignment_final" tree="@Tree.t:moose_alignment_final">
-                    <parameterization id="EpiBDMMPrimeParameterization.t:moose_alignment_final" spec="bdmmprime.parameterization.EpiParameterization" processLength="@originBDMMPrime.t:moose_alignment_final">
-                        <R0 id="R0SVEpi.t:moose_alignment_final" spec="bdmmprime.parameterization.SkylineVectorParameter" processLength="@originBDMMPrime.t:moose_alignment_final" skylineValues="@R0Epi.t:moose_alignment_final" timesAreAges="true">
+                <distribution id="BDMMPrime.t:moose_alignment_final" spec="bdmmprime.distribution.BirthDeathMigrationDistribution" conditionOnSurvival="false" frequencies="@typeFrequenciesOriginMoovi" tree="@Tree.t:moose_alignment_final">
+                    <parameterization id="EpiBDMMPrimeParameterization.t:moose_alignment_final" spec="bdmmprime.parameterization.EpiParameterization" processLength="@originMoovi">
+                        <R0 id="ReWithinType" spec="bdmmprime.parameterization.SkylineVectorParameter" processLength="@originMoovi" skylineValues="@R0Epi.t:moose_alignment_final" timesAreAges="true">
                             <typeSet id="typeSetBDMMPrime.t:moose_alignment_final" spec="bdmmprime.parameterization.TypeSet">
                                 <typeTraitSet id="typeTraitSet.t:moose_alignment_final" spec="feast.fileio.TraitSetFromTaxonSet" 
                                     traitname="type" 
@@ -96,20 +96,20 @@ name="alignment"/>
                                 </typeTraitSet>
                             </typeSet>
                         </R0>
-                        <becomeUninfectiousRate id="becomeUninfectiousRateSVEpi.t:moose_alignment_final" spec="bdmmprime.parameterization.SkylineVectorParameter" processLength="@originBDMMPrime.t:moose_alignment_final" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:moose_alignment_final">
+                        <becomeUninfectiousRate id="becomeUninfectiousRateMoovi" spec="bdmmprime.parameterization.SkylineVectorParameter" processLength="@originMoovi" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:moose_alignment_final">
                             <parameter id="becomeUninfectiousRateEpi.t:432_H5N8_sud_ouest_HA_dup_final" spec="parameter.RealParameter" estimate="false" name="skylineValues">52 52</parameter>
                         </becomeUninfectiousRate>    
-                        <samplingProportion id="samplingProportionSVEpi.t:moose_alignment_final" spec="bdmmprime.parameterization.SkylineVectorParameter" processLength="@originBDMMPrime.t:moose_alignment_final" skylineValues="@samplingProportionEpi.t:moose_alignment_final" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:moose_alignment_final">
+                        <samplingProportion id="samplingProportionMoovi" spec="bdmmprime.parameterization.SkylineVectorParameter" processLength="@originMoovi" skylineValues="@samplingProportionEpi.t:moose_alignment_final" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:moose_alignment_final">
                             <parameter id="samplingProportionChangeTimesEpi.t:moose_alignment_final" spec="parameter.RealParameter" estimate="false" lower="0.0" name="changeTimes">1.9 3.45</parameter>
                         </samplingProportion>
-                        <rhoSampling id="rhoSamplingProbTPEpi.t:moose_alignment_final" spec="bdmmprime.parameterization.TimedParameter" processLength="@originBDMMPrime.t:moose_alignment_final" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:moose_alignment_final"/>
-                        <removalProb id="removalProbSVEpi.t:moose_alignment_final" spec="bdmmprime.parameterization.SkylineVectorParameter" processLength="@originBDMMPrime.t:moose_alignment_final" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:moose_alignment_final">
+                        <rhoSampling id="rhoSamplingProbMoovi" spec="bdmmprime.parameterization.TimedParameter" processLength="@originMoovi" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:moose_alignment_final"/>
+                        <removalProb id="removalProbMoovi" spec="bdmmprime.parameterization.SkylineVectorParameter" processLength="@originMoovi" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:moose_alignment_final">
                             <parameter id="removalProbEpi.t:moose_alignment_final" spec="parameter.RealParameter" estimate="false" lower="0.0" name="skylineValues" upper="1.0">1.0</parameter>
                         </removalProb>
-                        <!--<migrationRate id="migrationRateSMEpi.t:moose_alignment_final" spec="bdmmprime.parameterization.SkylineMatrixParameter" processLength="@originBDMMPrime.t:moose_alignment_final" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:moose_alignment_final">
+                        <!--<migrationRate id="migrationRateSMEpi.t:moose_alignment_final" spec="bdmmprime.parameterization.SkylineMatrixParameter" processLength="@originMoovi" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:moose_alignment_final">
                             <parameter id="migrationRateEpi.t:moose_alignment_final" spec="parameter.RealParameter" estimate="false" lower="0.0" name="skylineValues">1.0</parameter>
                         </migrationRate>-->
-                        <R0AmongDemes id="R0AmongDemesSMEpi.t:moose_alignment_final" spec="bdmmprime.parameterization.SkylineMatrixParameter" processLength="@originBDMMPrime.t:moose_alignment_final" skylineValues="@R0AmongDemesEpi.t:moose_alignment_final" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:moose_alignment_final"/>
+                        <R0AmongDemes id="ReBetweenTypes" spec="bdmmprime.parameterization.SkylineMatrixParameter" processLength="@originMoovi" skylineValues="@R0AmongDemesEpi.t:moose_alignment_final" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:moose_alignment_final"/>
                         <typeSet idref="typeSetBDMMPrime.t:moose_alignment_final"/>
                     </parameterization>
                     <typeTraitSet idref="typeTraitSet.t:moose_alignment_final"/>
@@ -150,7 +150,7 @@ name="alignment"/>
                         <parameter id="RealParameter.14" spec="parameter.RealParameter" estimate="false" lower="0.0" name="S" upper="5.0">1.0</parameter>
                     </LogNormal>
                 </distribution>-->
-                <!--<prior id="ClockPrior.c:moose_alignment_final" name="distribution" x="@clockRate.c:moose_alignment_final">
+                <!--<prior id="ClockPrior.c:moose_alignment_final" name="distribution" x="@clockRateMoovi">
                     <LogNormal id="LogNormalDistributionModel.3" name="distr">
                         <parameter id="RealParameter.11" spec="parameter.RealParameter" estimate="false" name="M">5.0E-4</parameter>
                         <parameter id="RealParameter.12" spec="parameter.RealParameter" estimate="false" lower="0.0" name="S" upper="5.0">0.5</parameter>
@@ -172,7 +172,7 @@ name="alignment"/>
                         <parameter id="RealParameter.2" spec="parameter.RealParameter" estimate="false" name="S">1.25</parameter>
                     </LogNormal>
                 </prior>
-                <prior id="originBDMMPrimePrior.t:moose_alignment_final" name="distribution" x="@originBDMMPrime.t:moose_alignment_final">
+                <prior id="originBDMMPrimePrior.t:moose_alignment_final" name="distribution" x="@originMoovi">
                     <LogNormal id="LogNormalDistributionModel.7" name="distr">
                         <parameter id="RealParameter.24" spec="parameter.RealParameter" estimate="false" name="M">1.0</parameter>
                         <parameter id="RealParameter.25" spec="parameter.RealParameter" estimate="false" lower="0.0" name="S" upper="5.0">1.0</parameter>
@@ -198,7 +198,7 @@ name="alignment"/>
                         </substModel>
                     </siteModel>
                     <branchRateModel id="StrictClock.c:moose_alignment_final" spec="beast.base.evolution.branchratemodel.StrictClockModel">
-                    <parameter id="clockRate.c:moose_alignment_final" spec="parameter.RealParameter" estimate="false" name="clock.rate">5.0E-4</parameter>
+                    <parameter id="clockRateMoovi" spec="parameter.RealParameter" estimate="false" name="clock.rate">5.0E-4</parameter>
                 </branchRateModel>
                 </distribution>
             </distribution>
@@ -212,7 +212,7 @@ name="alignment"/>
                 <transformations id="AVMNLogTransform.moose_alignment_final" spec="operator.kernel.Transform$LogTransform">
                     <f idref="kappa.s:moose_alignment_final"/>
                     <f idref="gammaShape.s:moose_alignment_final"/> -->
-                    <!--<f idref="clockRate.c:moose_alignment_final"/>-->
+                    <!--<f idref="clockRateMoovi"/>-->
                 <!-- </transformations>
                 <transformations id="AVMNNoTransform.moose_alignment_final" spec="operator.kernel.Transform$NoTransform">
                     <f idref="Tree.t:moose_alignment_final"/>
@@ -243,24 +243,24 @@ name="alignment"/>
         <operator id="BDMMPrimeBICEPSEpochAll" spec="EpochFlexOperator" tree="@Tree.t:moose_alignment_final"   fromOldestTipOnly="false" scaleFactor="0.1" weight="2.0"/>
         <operator id="BDMMPrimeBICEPSTreeFlex" spec="TreeStretchOperator" tree="@Tree.t:moose_alignment_final" scaleFactor="0.01" weight="2.0"/>
 
-        <operator id="originBDMMPrimeScaler.t:moose_alignment_final" spec="ScaleOperator" parameter="@originBDMMPrime.t:moose_alignment_final" weight="3.0"/>
+        <operator id="originBDMMPrimeScaler.t:moose_alignment_final" spec="ScaleOperator" parameter="@originMoovi" weight="3.0"/>
         <operator id="typeFrequenciesExchanger.t:moose_alignment_final" spec="operator.DeltaExchangeOperator" delta="0.1" weight="1.0">
-            <parameter idref="typeFrequencies.t:moose_alignment_final"/>
+            <parameter idref="typeFrequenciesOriginMoovi"/>
         </operator>
         <operator id="R0EpiScaler.t:moose_alignment_final" spec="ScaleOperator" parameter="@R0Epi.t:moose_alignment_final" weight="3.0"/>
         <!--<operator id="becomeUninfectiousRateEpiScaler.t:moose_alignment_final" spec="ScaleOperator" parameter="@becomeUninfectiousRateEpi.t:moose_alignment_final" weight="3.0"/>-->
         <operator id="samplingProportionEpiScaler.t:moose_alignment_final" spec="SmartScaleOperator" parameter="@samplingProportionEpi.t:moose_alignment_final" weight="3.0"/>
         <!--<operator id="StrictClockRateScaler.c:moose_alignment_final" spec="AdaptableOperatorSampler" weight="1.5">
-            <parameter idref="clockRate.c:moose_alignment_final"/>
+            <parameter idref="clockRateMoovi"/>
             <operator idref="AVMNOperator.moose_alignment_final"/>
-            <operator id="StrictClockRateScalerX.c:moose_alignment_final" spec="kernel.BactrianScaleOperator" parameter="@clockRate.c:moose_alignment_final" upper="10.0" weight="3.0"/>
+            <operator id="StrictClockRateScalerX.c:moose_alignment_final" spec="kernel.BactrianScaleOperator" parameter="@clockRateMoovi" upper="10.0" weight="3.0"/>
         </operator>
         <operator id="strictClockUpDownOperator.c:moose_alignment_final" spec="AdaptableOperatorSampler" weight="1.5">
-            <parameter idref="clockRate.c:moose_alignment_final"/>
+            <parameter idref="clockRateMoovi"/>
             <tree idref="Tree.t:moose_alignment_final"/>
             <operator idref="AVMNOperator.moose_alignment_final"/>
             <operator id="strictClockUpDownOperatorX.c:moose_alignment_final" spec="operator.kernel.BactrianUpDownOperator" scaleFactor="0.75" weight="3.0">
-                <up idref="clockRate.c:moose_alignment_final"/>
+                <up idref="clockRateMoovi"/>
                 <down idref="Tree.t:moose_alignment_final"/>
             </operator>
         </operator>-->
@@ -274,29 +274,23 @@ name="alignment"/>
             <log idref="kappa.s:moose_alignment_final"/>
             <!-- <log idref="freqParameter.s:moose_alignment_final"/> -->
             <log idref="gammaShape.s:moose_alignment_final"/>
-            <log idref="originBDMMPrime.t:moose_alignment_final"/>
-            <log idref="typeFrequencies.t:moose_alignment_final"/>
+            <log idref="originMoovi"/>
+            <log idref="typeFrequenciesOriginMoovi"/>
             <log id="typedTreeStats.t:moose_alignment_final" spec="bdmmprime.mapping.TypedTreeStatsLogger" includeRootEdge="true" typeLabel="type" typeSet="@typeSetBDMMPrime.t:moose_alignment_final">
-                <typedTree id="typeMappedTree.t:moose_alignment_final" spec="bdmmprime.mapping.TypeMappedTree" bdmmDistrib="@BDMMPrime.t:moose_alignment_final" frequencies="@typeFrequencies.t:moose_alignment_final" mapOnInit="false" remapOnLog="true" typeLabel="type" typeTraitSet="@typeTraitSet.t:moose_alignment_final" untypedTree="@Tree.t:moose_alignment_final"/>
+                <typedTree id="typeMappedTree.t:moose_alignment_final" spec="bdmmprime.mapping.TypeMappedTree" bdmmDistrib="@BDMMPrime.t:moose_alignment_final" frequencies="@typeFrequenciesOriginMoovi" mapOnInit="false" remapOnLog="true" typeLabel="type" typeTraitSet="@typeTraitSet.t:moose_alignment_final" untypedTree="@Tree.t:moose_alignment_final"/>
             </log>
-            <log idref="R0SVEpi.t:moose_alignment_final"/>
-            <log idref="R0AmongDemesSMEpi.t:moose_alignment_final"/>
-            <log idref="becomeUninfectiousRateSVEpi.t:moose_alignment_final"/>
-            <log idref="samplingProportionSVEpi.t:moose_alignment_final"/>
-            <log idref="removalProbSVEpi.t:moose_alignment_final"/>
-            <log idref="rhoSamplingProbTPEpi.t:moose_alignment_final"/>
-            <log idref="clockRate.c:moose_alignment_final"/>
+            <log idref="ReWithinType"/>
+            <log idref="ReBetweenTypes"/>
+            <log idref="becomeUninfectiousRateMoovi"/>
+            <log idref="samplingProportionMoovi"/>
+            <log idref="removalProbMoovi"/>
+            <log idref="rhoSamplingProbMoovi"/>
+            <log idref="clockRateMoovi"/>
         </logger>
         <logger id="screenlog" spec="Logger" logEvery="100">
-            <log idref="posterior"/>
-            <log idref="likelihood"/>
-            <log idref="prior"/>
-            <log idref="clockRate.c:moose_alignment_final"/>
-            <log idref="R0SVEpi.t:moose_alignment_final"/>
-            <log idref="R0AmongDemesSMEpi.t:moose_alignment_final"/>
-            <log idref="samplingProportionSVEpi.t:moose_alignment_final"/>
-            <log idref="becomeUninfectiousRateSVEpi.t:moose_alignment_final"/>
-
+            <log idref="originMoovi"/>
+            <log idref="ReWithinType"/>
+            <log idref="ReBetweenTypes"/>
         </logger>
         <logger id="treelog.t:moose_alignment_final" spec="Logger" fileName="$(filebase)-$(tree).trees" logEvery="5000" mode="tree">
             <log id="TreeWithMetaDataLogger.t:moose_alignment_final" spec="beast.base.evolution.TreeWithMetaDataLogger" tree="@Tree.t:moose_alignment_final"/>
@@ -308,7 +302,7 @@ name="alignment"/>
             <log id="nodeTypedTree.t:moose_alignment_final" spec="bdmmprime.mapping.TypedNodeTreeLogger" typedTree="@typeMappedTree.t:moose_alignment_final"/>
         </logger>
 <!--         <logger id="trajLogger.t:moose_alignment_final" spec="bdmmprime.util.OptionalLogger" fileName="$(filebase).$(tree).traj" logEvery="5000">
-            <log id="typedTraj.t:moose_alignment_final" spec="bdmmprime.trajectories.SampledTrajectory" bdmmDistrib="@BDMMPrime.t:moose_alignment_final" frequencies="@typeFrequencies.t:moose_alignment_final" typeMappedTree="@typeMappedTree.t:moose_alignment_final" useTauLeaping="true"/>
+            <log id="typedTraj.t:moose_alignment_final" spec="bdmmprime.trajectories.SampledTrajectory" bdmmDistrib="@BDMMPrime.t:moose_alignment_final" frequencies="@typeFrequenciesOriginMoovi" typeMappedTree="@typeMappedTree.t:moose_alignment_final" useTauLeaping="true"/>
         </logger> -->
         <operatorschedule id="OperatorSchedule" spec="OperatorSchedule"/>
     </run>

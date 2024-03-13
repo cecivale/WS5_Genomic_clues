@@ -41,7 +41,7 @@ beaver2 <- ggplot(dat_beaver) +
         axis.text = element_text(size = 20),
         panel.grid.major.y =  element_line())
 
-beaver <-  plot_grid(beaver1, beaver2, ncol = 1, rel_heights = c(0.8, 0.2))
+beaver <-  plot_grid(beaver1, beaver2, ncol = 1, rel_heights = c(0.7, 0.3))
 
 pdf("Figure_step1_beaver.pdf", width = 18, height = 20)
 beaver

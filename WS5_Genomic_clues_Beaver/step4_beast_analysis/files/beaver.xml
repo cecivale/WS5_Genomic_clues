@@ -63,10 +63,10 @@ name="alignment"/>
             <parameter id="gammaShape.s:beaver_164_a" spec="parameter.RealParameter" lower="0.1" name="stateNode">1.0</parameter>
             <parameter id="kappa.s:beaver_164_a" spec="parameter.RealParameter" lower="0.0" name="stateNode">2.0</parameter>
             <parameter id="freqParameter.s:beaver_164_a" spec="parameter.RealParameter" dimension="4" lower="0.0" name="stateNode" upper="1.0">0.25</parameter>
-            <parameter id="ORCucldMean.c:beaver_164_a" spec="parameter.RealParameter" name="stateNode">0.0001</parameter>
+            <parameter id="clockRateMean" spec="parameter.RealParameter" name="stateNode">0.0001</parameter>
             <parameter id="ORCsigma.c:beaver_164_a" spec="parameter.RealParameter" lower="0.0" name="stateNode">0.2</parameter>
             <parameter id="ORCRates.c:beaver_164_a" spec="parameter.RealParameter" dimension="760" lower="1.0E-100" name="stateNode">0.5</parameter>
-            <parameter id="originBDMMPrime.t:beaver_164_a" spec="parameter.RealParameter" name="stateNode">15</parameter>
+            <parameter id="originBeaver" spec="parameter.RealParameter" name="stateNode">15</parameter>
             <parameter id="R0Epi.t:beaver_164_a" spec="parameter.RealParameter" dimension="1" lower="0.0" name="stateNode">2</parameter> 
             <parameter id="samplingProportionEpi.t:beaver_164_a" spec="parameter.RealParameter" dimension="1" lower="0.0" name="stateNode" upper="1.0">0.01 0.0</parameter>
         </state>
@@ -85,9 +85,9 @@ name="alignment"/>
                 <distribution id="BDMMPrime.t:beaver_164_a" spec="bdmmprime.distribution.BirthDeathMigrationDistribution" useAnalyticalSingleTypeSolution="true" conditionOnSurvival="false" tree="@Tree.t:beaver_164_a"> <!--frequencies="@typeFrequencies.t:beaver_164_a"-->
                     
                     <!-- Parameterization BDMM-Prime -->
-                    <parameterization id="EpiBDMMPrimeParameterization.t:beaver_164_a" spec="bdmmprime.parameterization.EpiParameterization" processLength="@originBDMMPrime.t:beaver_164_a">
+                    <parameterization id="EpiBDMMPrimeParameterization.t:beaver_164_a" spec="bdmmprime.parameterization.EpiParameterization" processLength="@originBeaver">
                         
-                        <R0 id="R0SVEpi.t:beaver_164_a" spec="bdmmprime.parameterization.SkylineVectorParameter" processLength="@originBDMMPrime.t:beaver_164_a" skylineValues="@R0Epi.t:beaver_164_a" timesAreAges="true">
+                        <R0 id="ReBeaver" spec="bdmmprime.parameterization.SkylineVectorParameter" processLength="@originBeaver" skylineValues="@R0Epi.t:beaver_164_a" timesAreAges="true">
                             <typeSet id="typeSetBDMMPrime.t:beaver_164_a" spec="bdmmprime.parameterization.TypeSet">
                                 <typeTraitSet id="typeTraitSet.t:beaver_164_a" spec="feast.fileio.TraitSetFromTaxonSet" traitname="type" delimiter="|" takeGroup="1">    
                                     <taxa id="TaxonSet.1" spec="TaxonSet" alignment="@beaver_164_a"/>
@@ -95,17 +95,17 @@ name="alignment"/>
                             </typeSet>
                         </R0>
 
-                        <becomeUninfectiousRate id="becomeUninfectiousRateSVEpi.t:beaver_164_a" spec="bdmmprime.parameterization.SkylineVectorParameter" processLength="@originBDMMPrime.t:beaver_164_a" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:beaver_164_a">
+                        <becomeUninfectiousRate id="becomeUninfectiousRateBeaver" spec="bdmmprime.parameterization.SkylineVectorParameter" processLength="@originBeaver" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:beaver_164_a">
                             <parameter id="becomeUninfectiousRate" spec="parameter.RealParameter" estimate="false" name="skylineValues">8</parameter>
                         </becomeUninfectiousRate>
                         
-                        <samplingProportion id="samplingProportionSVEpi.t:beaver_164_a" spec="bdmmprime.parameterization.SkylineVectorParameter" processLength="@originBDMMPrime.t:beaver_164_a" skylineValues="@samplingProportionEpi.t:beaver_164_a" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:beaver_164_a">
+                        <samplingProportion id="samplingProportionBeaver" spec="bdmmprime.parameterization.SkylineVectorParameter" processLength="@originBeaver" skylineValues="@samplingProportionEpi.t:beaver_164_a" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:beaver_164_a">
                
                             <parameter id="samplingProportionChangeTimesEpi.t:beaver_164_a" spec="parameter.RealParameter" estimate="false" lower="0.0" name="changeTimes">12.2</parameter>
 
                         </samplingProportion>
                         
-                        <removalProb id="removalProbSVEpi.t:beaver_164_a" spec="bdmmprime.parameterization.SkylineVectorParameter" processLength="@originBDMMPrime.t:beaver_164_a" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:beaver_164_a">
+                        <removalProb id="removalProbBeaver" spec="bdmmprime.parameterization.SkylineVectorParameter" processLength="@originBeaver" timesAreAges="true" typeSet="@typeSetBDMMPrime.t:beaver_164_a">
                             <parameter id="removalProbEpi.t:beaver_164_a" spec="parameter.RealParameter" estimate="false" lower="0.0" name="skylineValues" upper="1.0">1.0</parameter>
                         </removalProb>
                         
@@ -129,7 +129,7 @@ name="alignment"/>
                     </Gamma>
                 </prior>
 
-                <prior id="ORCucldMeanPrior.c:beaver_164_a" name="distribution" x="@ORCucldMean.c:beaver_164_a">
+                <prior id="ORCucldMeanPrior.c:beaver_164_a" name="distribution" x="@clockRateMean">
                     <LogNormal id="LogNormalDistributionModel.2" meanInRealSpace="true" name="distr">
                         <parameter id="RealParameter.11" spec="parameter.RealParameter" estimate="false" name="M">0.0001</parameter>
                         <parameter id="RealParameter.12" spec="parameter.RealParameter" estimate="false" lower="0.0" name="S" upper="5.0">2</parameter>
@@ -162,7 +162,7 @@ name="alignment"/>
                     </LogNormal>
                 </prior>
 
-                <prior id="originBDMMPrimePrior.t:beaver_164_a" name="distribution" x="@originBDMMPrime.t:beaver_164_a">
+                <prior id="originBDMMPrimePrior.t:beaver_164_a" name="distribution" x="@originBeaver">
                     <LogNormal id="LogNormalDistributionModel.5" name="distr">
                         <parameter id="RealParameter.17" spec="parameter.RealParameter" estimate="false" name="M">2.5</parameter>
                         <parameter id="RealParameter.18" spec="parameter.RealParameter" estimate="false" lower="0.0" name="S" upper="5.0">1</parameter>
@@ -184,7 +184,7 @@ name="alignment"/>
                             <frequencies id="estimatedFreqs.s:beaver_164_a" spec="Frequencies" frequencies="@freqParameter.s:beaver_164_a"/>
                         </substModel>
                     </siteModel>
-                    <branchRateModel id="OptimisedRelaxedClock.c:beaver_164_a" spec="beast.base.evolution.branchratemodel.UCRelaxedClockModel" clock.rate="@ORCucldMean.c:beaver_164_a" rates="@ORCRates.c:beaver_164_a" tree="@Tree.t:beaver_164_a">
+                    <branchRateModel id="OptimisedRelaxedClock.c:beaver_164_a" spec="beast.base.evolution.branchratemodel.UCRelaxedClockModel" clock.rate="@clockRateMean" rates="@ORCRates.c:beaver_164_a" tree="@Tree.t:beaver_164_a">
                         <LogNormal id="ORCLogNormalDistributionModel.c:beaver_164_a" S="@ORCsigma.c:beaver_164_a" meanInRealSpace="true" name="distr">
                             <parameter id="RealParameter.4" spec="parameter.RealParameter" estimate="false" name="M">1.0</parameter>
                         </LogNormal>
@@ -222,9 +222,9 @@ name="alignment"/>
                 <parameter idref="freqParameter.s:beaver_164_a"/>
             </operator>
         </operator>
-        <operator id="ORCucldMeanScaler.c:beaver_164_a" spec="ScaleOperator" parameter="@ORCucldMean.c:beaver_164_a" scaleFactor="0.5" weight="3.0"/>
+        <operator id="ORCucldMeanScaler.c:beaver_164_a" spec="ScaleOperator" parameter="@clockRateMean" scaleFactor="0.5" weight="3.0"/>
         <operator id="ORC.UpDown.c:beaver_164_a" spec="operator.kernel.BactrianUpDownOperator" scaleFactor="0.75" weight="3.0">
-            <up idref="ORCucldMean.c:beaver_164_a"/>
+            <up idref="clockRateMean"/>
             <down idref="Tree.t:beaver_164_a"/>
         </operator>
         <operator id="ORCAdaptableOperatorSampler_sigma.c:beaver_164_a" spec="AdaptableOperatorSampler" weight="3.0">
@@ -270,7 +270,7 @@ name="alignment"/>
             <operator id="ORCNER_dAE_dBE_dCE.c:beaver_164_a" spec="orc.ner.NEROperator_dAE_dBE_dCE" rates="@ORCRates.c:beaver_164_a" tree="@Tree.t:beaver_164_a" weight="1.0"/>
             <metric id="RNNIMetric.0" spec="beastlabs.evolution.tree.RNNIMetric" taxonset="@TaxonSet.beaver_164_a"/>
         </operator>
-        <operator id="originBDMMPrimeScaler.t:beaver_164_a" spec="ScaleOperator" parameter="@originBDMMPrime.t:beaver_164_a" weight="3.0"/>
+        <operator id="originBDMMPrimeScaler.t:beaver_164_a" spec="ScaleOperator" parameter="@originBeaver" weight="3.0"/>
         <!--<operator id="typeFrequenciesExchanger.t:beaver_164_a" spec="operator.DeltaExchangeOperator" delta="0.1" weight="1.0">
             <parameter idref="typeFrequencies.t:beaver_164_a"/>
         </operator>-->
@@ -286,23 +286,19 @@ name="alignment"/>
             <log idref="gammaShape.s:beaver_164_a"/>
             <log idref="kappa.s:beaver_164_a"/>
             <log idref="freqParameter.s:beaver_164_a"/>
-            <log idref="ORCucldMean.c:beaver_164_a"/>
+            <log idref="clockRateMean"/>
             <log idref="ORCsigma.c:beaver_164_a"/>
             <log id="ORCRatesStat.c:beaver_164_a" spec="beast.base.evolution.RateStatistic" branchratemodel="@OptimisedRelaxedClock.c:beaver_164_a" tree="@Tree.t:beaver_164_a"/>
-            <log idref="originBDMMPrime.t:beaver_164_a"/>
-            <log idref="R0SVEpi.t:beaver_164_a"/>
-            <log idref="becomeUninfectiousRateSVEpi.t:beaver_164_a"/>
-            <log idref="samplingProportionSVEpi.t:beaver_164_a"/>
-            <log idref="removalProbSVEpi.t:beaver_164_a"/>
+            <log idref="originBeaver"/>
+            <log idref="ReBeaver"/>
+            <log idref="becomeUninfectiousRateBeaver"/>
+            <log idref="samplingProportionBeaver"/>
+            <log idref="removalProbBeaver"/>
         </logger>
         <logger id="screenlog" spec="Logger" logEvery="100">
-            <log idref="posterior"/>
-            <log idref="likelihood"/>
-            <log idref="prior"/>
-            <log idref="R0SVEpi.t:beaver_164_a"/>
-            <log idref="becomeUninfectiousRateSVEpi.t:beaver_164_a"/>
-            <log idref="samplingProportionSVEpi.t:beaver_164_a"/>
-             <log idref="ORCucldMean.c:beaver_164_a"/>
+            <log idref="originBeaver"/>
+            <log idref="ReBeaver"/>
+             <log idref="clockRateMean"/>
         </logger>
         <logger id="treelog.t:beaver_164_a" spec="Logger" fileName="$(filebase)-$(tree).trees" logEvery="100" mode="tree">
             <log id="TreeWithMetaDataLogger.t:beaver_164_a" spec="beast.base.evolution.TreeWithMetaDataLogger" branchratemodel="@OptimisedRelaxedClock.c:beaver_164_a" tree="@Tree.t:beaver_164_a"/>

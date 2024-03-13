@@ -54,9 +54,8 @@ echo "\nPress any key to continue...\n"
 read continue
 
 echo "Wait... It appears that some sequences are considerably shorter than others. Can you identify them?
-      \nThese shorter sequences might not be very informative for our analysis. We can have a quick look with R at the number of missing positions in our sequences (missing_positions.pdf plot and if you want to have a look at the code you can open the script filter_sequences.R)." | pv -qL 40; 
+      \nThese shorter sequences might not be very informative for our analysis. We can have a quick look with R at the number of missing positions in our sequences (missing_nucleotides.pdf)." | pv -qL 40; 
 cp /files/missing_nucleotides.pdf  /data/ ;
-cp /files/filter_sequences.R  /data/ ;
 
 echo "\nPress any key to continue...\n"
 read continue
