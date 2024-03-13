@@ -8,9 +8,9 @@ services:
         echo " ---> Go to the Exec panel and type START" 
         sleep infinity
     volumes:
-      - ./CONFIDENTIAL_investigators:/data/
+      - ~/Desktop/CONFIDENTIAL_investigators:/data/
       - ./step1_epi_data/files:/files/
-      - ./step1_epi_data:/app/
+      # - ./step1_epi_data:/app/
     container_name: M_Step1_Epi_data
 
   step2:
@@ -24,9 +24,9 @@ services:
     stdin_open: true 
     tty: true
     volumes:
-      - ./CONFIDENTIAL_investigators:/data/
+      - ~/Desktop/CONFIDENTIAL_investigators:/data/
       - ./step2_sequencing/files:/files/
-      - ./step2_sequencing:/app/
+      # - ./step2_sequencing:/app/
     container_name: M_Step2_Sequencing
 
   step3:
@@ -40,9 +40,9 @@ services:
     stdin_open: true 
     tty: true
     volumes:
-      - ./CONFIDENTIAL_investigators:/data/
+      - ~/Desktop/CONFIDENTIAL_investigators:/data/
       - ./step3_model_design/files:/files/
-      - ./step3_model_design:/app/
+      # - ./step3_model_design:/app/
     container_name: M_Step3_Model_design
 
   step4:
@@ -56,9 +56,9 @@ services:
     stdin_open: true 
     tty: true
     volumes:
-      - ./CONFIDENTIAL_investigators:/data/
+      - ~/Desktop/CONFIDENTIAL_investigators:/data/
       - ./step4_beast_analysis/files:/files/
-      - ./step4_beast_analysis:/app/
+      # - ./step4_beast_analysis:/app/
     container_name: M_Step4_BEAST2_analysis
 
    # docker compose up -d
