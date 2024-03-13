@@ -5,7 +5,7 @@ echo "\n----------------------"
 echo "\e[94mDear investigators, we have exciting news!\n" | pv -qL 20
 
 
-echo "Our field epi vet team were able to take some samples from 103 moose individuals and 181 humans. We sent them to the sequencing lab and we have the results back!" | pv -qL 40 
+echo "Our field epi vet team was able to take some samples from 103 moose individuals and 181 humans. We sent them to the sequencing lab and we have the results back!" | pv -qL 40 
 
 cat /files/ascii_dna.txt
 
@@ -13,7 +13,7 @@ cat /files/ascii_dna.txt
 while true; do
     read -p "Would you like to look at the genetic sequences? (y/n) " yn
         case $yn in
-            [Yy]* )  cp /files/moose_sequences.fasta  /data/; echo "\nYou can find the FASTA file with the sequences in your CONFIDENTIAL folder. Just double click in the file for a quick visualization.";
+            [Yy]* )  cp /files/moose_sequences.fasta  /data/; echo "\nYou can find the FASTA file (moose_sequences.fasta) with the sequences in your CONFIDENTIAL folder. Just double click in the file for a quick visualization.";
                      break;;
             [Nn]* ) echo "\nOk. Are then you ready for the press conference? They want answers to the origin and speed of disease transmission of MOO-vi. Continue to step 7."; exit;;
             * ) echo "\nPlease answer yes or no.";;
@@ -40,7 +40,7 @@ while true; do
             [Yy]* )  echo "\n We will use MAFFT, a common software alignment to run the multiple sequence alignment.\e[0m";
                      "/usr/local/bin/mafft" --thread 8 --auto "/files/moose_sequences_short.fasta" > "/files/moose_aligned_short.fasta";
                      cp /files/moose_aligned.fasta  /data/ ;
-            echo "\n\e[94mAlignment completed! You can find the FASTA file with the sequences in your CONFIDENTIAL folder. Just double click in the file for a quick visualization.";
+            echo "\n\e[94mAlignment completed! You can find the FASTA file (moose_aligned.fasta) with the sequences in your CONFIDENTIAL folder. Just double click in the file for a quick visualization.";
                      break;;
             [Nn]* ) echo "\nOk. Are then you ready for the press conference to report your conclusions? Continue to step 5."; exit;;
             * ) echo "\nPlease answer yes or no.";;
@@ -58,7 +58,7 @@ cp /files/missing_nucleotides.pdf  /data/ ;
 
 echo "\nPress any key to continue...\n"
 read continue
-echo "Some sequences have a high percentage of missing nucleotides, we have filter those bad quality sequences, using 90% of genome completeness as threshold." | pv -qL 40 ;
+echo "Some sequences have a high percentage of missing nucleotides, we have filtered those bad quality sequences, using 90% of genome completeness as threshold. You can find the final alignment (moose_aligned_filtered.fasta) in your CONFIDENTIAL folder." | pv -qL 40 ;
 cp /files/moose_aligned_filtered.fasta  /data/ ;
 
 echo "\nPress any key to continue...\n"

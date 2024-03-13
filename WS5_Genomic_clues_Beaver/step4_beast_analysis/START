@@ -9,12 +9,12 @@ echo "\e[94mHello investigators, we are the BEAST2 team, ready to help you run y
 
 echo "Now that you have defined your phylodynamic framework, let’s define priors for some of your parameters." | pv -qL 40 
 
-echo "\nSince it looks like there was a resurgence of cases in the last 3 years, maybe we should have a look at how the virus evolved over time between the two phases of the epidemic. Let's have some thoughts about the molecular clock model. If you did well on the previous step, you should have understood that the molecular clock rate is a model describing the nucleotide evolutionary rates along the branches of the phylogeny.
+echo "\nSince it looks like there was a resurgence of cases in the last 3 years, maybe we should have a look at how the virus evolved over time between the two phases of the epidemic. Let's have some thoughts about the molecular clock model. Hopefully, you may have understood that the molecular clock rate is a model describing the nucleotide evolutionary rates along the branches of the phylogeny.
 
 Which of the following priors would you use for the clock rate? (a/b/c)
  (a) A relaxed clock with rate uniformly distributed between -infinity and infinity
  (b) A relaxed clock with rate with average 10^-5 substitution/site/year 
- (c) A strict clock"  | pv -qL 40
+ (c) A strict clock with a fixed rate of 10^-5 substitution/site/year"  | pv -qL 40
 
 while true; do
     read -p "Your choice: " choice
@@ -29,9 +29,9 @@ done
 echo "\nPress any key to continue..."
 read continue
 
-echo "In general, it is a good practice to fix one parameter of the birth-death (BD) model for identifiability. If you did well on the previous step, you should have understood that the MTBD model is a transmission model describing the process of generating the phylogeny.
+echo "In general, it is a good practice to fix one parameter of the multi-type birth-death (MTBD) model for identifiability. Hopefully, you may have understood that the MTBD model is a transmission model describing the process of generating the phylogeny.
 
-We just receive information from the experimental lab staff that the beavers they experimentally infected remained infectious on average for 45 days, so let's fix the becoming uninfectious rate to a given value based on this information. 
+We just receive information from the experimental lab staff that the beavers they experimentally infected remained infectious on average for 45 days, so let's fix the becoming uninfectious rate to a given value based on this information. Note that the rate should be in years...
 
 Which of the following values would you use for the becoming uninfectious rate prior? (a/b/c)
  (a) 0.45
@@ -60,7 +60,7 @@ while true; do
         case $yn in
             [Yy]* )  echo "\nRunning BEAST2... \e[0m";
                      beast -overwrite /files/beaver.xml;
-            echo "\n\e[94mAnalysis completed! Above you will see BEAST2 running your analysis. And you can find the .xml document with your analysis definition that BEAST2 took as input in the CONFIDENTIAL folder."; 
+            echo "\n\e[94mAnalysis completed! Above you will see BEAST2 running your analysis."; 
             echo "\nThe screen shows parameters sampled every 100 steps from the joint posterior distributions, including the effective reproduction number, the become uninfectious rate, etc. Close to the end of the list, you will find estimates of the time it takes per million samples."; break;;
             [Nn]* ) echo "\nOk. Be ready for the press conference to report your conclusions."; exit;;
             * ) echo "\nPlease answer yes or no.";;
@@ -73,7 +73,7 @@ read continue
 while true; do
     read -p "Do you want to take a closer look a the inferred posterior trees? (y/n) " yn
         case $yn in
-            [Yy]* )  cp /files/beaver_summary_tree1.pdf  /data/; cp /files/beaver_summary_tree2.pdf  /data/; echo "\nYou can access the files in your CONFIDENTIAL_investigators folder. The two files provided show the same summary tree from your inferred posterior trees. However, one displays the sequence labels, while the other displays colored branches based on the molecular clock rate.
+            [Yy]* )  cp /files/beaver_summary_tree1.pdf  /data/; cp /files/beaver_summary_tree2.pdf  /data/; echo "\nYou can access the files in your CONFIDENTIAL_investigators folder. The two files provided show the same summary tree from your inferred posterior trees. However, one displays the sequence labels (beaver_mcc_tree1.pdf), while the other displays colored branches based on the molecular clock rate (beaver_mcc_tree2.pdf).
                         \nEach tip represents a sampled sequence, and each branch represents the estimated evolutionary relationship between sequences over time." | pv -qL 40 ;
                      echo "\nBased on the summary tree, which conclusions can you draw about the transmission dynamics of the disease between beavers?" | pv -qL 40 ; break;;
             [Nn]* ) echo "\nOk. Be ready for the press conference to report your conclusions."; exit;;
@@ -89,8 +89,8 @@ while true; do
     read -p "Now, do you want to take a closer look at the inferred posterior model parameters? (y/n) " yn
         case $yn in
             [Yy]* )  cp /files/beaver.log  /data/; echo "\nYou can access the log file with the inferred parameters in your CONFIDENTIAL_investigators folder. Open it with Tracer software.";
-                     echo "\nOn the left panel, you will see the list of parameters of your phylodynamic framework and their mean posterior estimates. The Effective Sample Size (ESS) is the number of effectively independent samples from the posterior distribution that the Markov chain is equivalent to. If the ESS of a parameter is small then the estimate of the posterior distribution of that parameter will be poor. 
-                     \nOn the right panel, you can have a look at estimates tab, which describes the parameter estimate distribution. Additionally, you can explore the marginal density tab and the joint-marginal tab, which provide further insights into the parameter distributions and relationships between parameters." | pv -qL 40 ; break;;
+                     echo "\nOn the left panel, you will see the list of parameters of your phylodynamic framework and their mean posterior estimates. 
+                     \nOn the right panel, you can explore the estimates tab, which describes the parameter estimate distribution. Additionally, you can explore the trace tab, which provides further insights into the parameters sampled from the posterior. A key aspect to observe in the trace tab is the convergence of the analysis. If the graph resembles a caterpillar, it indicates that the analysis has converged for the parameters. Ensure that this caterpillar-like shape is consistent across all parameters for reliable results." | pv -qL 40 ; break;;
             [Nn]* ) echo "\nOk. Be ready for the press conference to report your conclusions." | pv -qL 40 ; exit;;
             * ) echo "\nPlease answer yes or no.";;
         esac
@@ -101,5 +101,3 @@ read continue
 
 
 echo "\nWell, it seems that now you have all information inferred from your genetic sequences to report your conclusions, ready for the press conference? ;-)";
-
-

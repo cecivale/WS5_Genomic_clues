@@ -31,12 +31,12 @@ echo "You should have the following paper sheets:
 echo "\nPress any key to continue..."
 read continue
 
-echo "Let's start by matching the model components to their definition by adding the definition inside the corresponding paper sheets. Ready, go!" | pv -qL 40 
+echo "Please match each definition with its corresponding paper sheet. Ready, go!" | pv -qL 40 
 
 echo "\nPress any key to continue..."
 read continue
 
-echo "Now, let's complete the missing links that connect all those components. Some have already been linked, try to find and link the missing ones. Ready, go!" | pv -qL 40 
+echo "Now, complete the missing links that connect all those components. Some have already been linked, try to find and link the missing ones. Ready, go!" | pv -qL 40 
 
 echo "\nPress any key to continue..."
 read continue
@@ -44,7 +44,7 @@ read continue
 while true; do
     read -p "Do you wish to see the answer? (y/n) " yn
         case $yn in
-            [Yy]* ) cp /files/Figure_model_beaver.pdf  /data/; echo "\nHere is what your phylodynamic framework should look like.";
+            [Yy]* ) cp /files/model_beaver.pdf  /data/; echo "\nGo to your CONFIDENTIAL folder and open the file model_beaver.pdf. Here is what your phylodynamic framework should look like.";
                     break;;
             [Nn]* ) echo "\nAre you sure? Let's move on to step 4 to run this phylodynamic analysis."; exit;;
             * ) echo "\nPlease answer yes or no.";;

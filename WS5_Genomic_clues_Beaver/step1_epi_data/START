@@ -18,7 +18,7 @@ while true; do
         case $yn in
             [Yy]* ) echo "\nFantastic! We knew we could count on you.";
                     echo "Our surveillance team has been working on the analysis of the reported case counts."; break;;
-            [Nn]* ) echo "\nOh, how bad, you were recommended as the best team for this job. We will have to find other investigators. Goodbye!"; exit;;
+            [Nn]* ) echo "\nOh, how bad, you were recommended as the best team for this job. We will have to find other investigators. Goodbye!";;
             * ) echo "\nPlease, answer yes or no.";;
         esac
 done
@@ -28,7 +28,7 @@ echo "\n";
 while true; do
     read -p "Do you wish to have a look at the reported data so far? (y/n) " yn
         case $yn in
-            [Yy]* ) cp /files/Figure_step1_beaver.pdf  /data/; echo "\nPlease, go to the CONFIDENTIAL_investigators folder to open the spatio-temporal plot created by the veterinary services in charge of the surveillance.";
+            [Yy]* ) cp /files/Figure_step1_beaver.pdf  /data/; echo "\nPlease, go to the CONFIDENTIAL_investigators folder to open the spatio-temporal plot (Figure_step1_beaver.pdf) created by the veterinary services in charge of the surveillance.";
                     echo "\nWhat observations can you draw regarding the spread of this new disease?"; break;;
             [Nn]* ) echo "\nPlease, start step 1 to continue."; exit;;
             * ) echo "\nPlease, answer yes or no.";;
