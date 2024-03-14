@@ -24,7 +24,7 @@ echo "\n";
 
 echo "You should have the following paper sheets:
 \n- Orange: data components - alignment, sequence, sample type, sample dates.
-\n- Blue: Model components - substitution model, molecular clock model and multi-type birth-death model.
+\n- Blue: Model components - substitution model, molecular clock model and birth-death model.
 \n- Green: Parameter components - origin, sampling proportion, becoming unifectious rate, etc.
 \n- White: Definitions corresponding to the different components. " | pv -qL 40 
 
