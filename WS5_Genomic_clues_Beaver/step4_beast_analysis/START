@@ -29,7 +29,7 @@ done
 echo "\nPress any key to continue..."
 read continue
 
-echo "In general, it is a good practice to fix one parameter of the multi-type birth-death (MTBD) model for identifiability. Hopefully, you may have understood that the MTBD model is a transmission model describing the process of generating the phylogeny.
+echo "In general, it is a good practice to fix one parameter of the birth-death (BD) model for identifiability. Hopefully, you may have understood that the BD model is a transmission model describing the process of generating the phylogeny.
 
 We just receive information from the experimental lab staff that the beavers they experimentally infected remained infectious on average for 45 days, so let's fix the becoming uninfectious rate to a given value based on this information. Note that the rate should be in years...
 
@@ -73,7 +73,7 @@ read continue
 while true; do
     read -p "Do you want to take a closer look a the inferred posterior trees? (y/n) " yn
         case $yn in
-            [Yy]* )  cp /files/beaver_summary_tree1.pdf  /data/; cp /files/beaver_summary_tree2.pdf  /data/; echo "\nYou can access the files in your CONFIDENTIAL_investigators folder. The two files provided show the same summary tree from your inferred posterior trees. However, one displays the sequence labels (beaver_mcc_tree1.pdf), while the other displays colored branches based on the molecular clock rate (beaver_mcc_tree2.pdf).
+            [Yy]* )  cp /files/beaver_summary_tree1.pdf  /data/; cp /files/beaver_summary_tree2.pdf  /data/; echo "\nYou can access the files in your CONFIDENTIAL_investigators folder. The two files provided show the same summary tree from your inferred posterior trees. However, one displays the sequence labels (beaver_summary_tree1.pdf), while the other displays colored branches based on the molecular clock rate (beaver_summary_tree2.pdf).
                         \nEach tip represents a sampled sequence, and each branch represents the estimated evolutionary relationship between sequences over time." | pv -qL 40 ;
                      echo "\nBased on the summary tree, which conclusions can you draw about the transmission dynamics of the disease between beavers?" | pv -qL 40 ; break;;
             [Nn]* ) echo "\nOk. Be ready for the press conference to report your conclusions."; exit;;
