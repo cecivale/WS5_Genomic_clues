@@ -24,11 +24,11 @@ beaver1 <- ggplot(adm) +
     geom_sf(fill ="ivory2", color = "black") +
     geom_point(data = dat_beaver, aes(x = Longitude, y = Latitude), size = 2, shape = 21, fill = "darkgreen", col = "black") +
     # coord_sf(xlim=c(-8, 30), ylim=c(35, 54)) +
-    facet_wrap("Year", ncol = 4) +
+    facet_wrap("Year", ncol = 7) +
     #guides(fill=guide_legend(title = "Country")) +
     theme_classic() +
     theme(legend.position = "none",
-          strip.text = element_text(size = 30),
+          strip.text = element_text(size = 20),
           axis.title = element_blank(), 
           axis.text = element_blank(),
           axis.ticks = element_blank())
@@ -39,7 +39,8 @@ beaver2 <- ggplot(dat_beaver) +
   theme(legend.text = element_text(size = 14),
         legend.title = element_text(size = 0),
         axis.text = element_text(size = 20),
-        panel.grid.major.y =  element_line())
+        panel.grid.major.y =  element_line()) +
+  ylab("reported infections")
 
 beaver <-  plot_grid(beaver1, beaver2, ncol = 1, rel_heights = c(0.7, 0.3))
 

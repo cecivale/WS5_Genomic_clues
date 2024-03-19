@@ -40,7 +40,8 @@ moose2 <- ggplot(dat_moose) +
   theme(legend.text = element_text(size = 14),
   legend.title = element_text(size = 0),
   axis.text = element_text(size = 14),
-  panel.grid.major.y =  element_line())
+  panel.grid.major.y =  element_line()) +
+  ylab("reported infections")
 
 moose <- plot_grid(moose1, moose2, rel_widths = c(0.4, 0.6))
 pdf("Figure_step1_moose.pdf", width = 15, height = 8)
