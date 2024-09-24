@@ -24,3 +24,7 @@ Then, they will receive the specific dataset of pathogen genetic sequences assoc
 Key concepts and tools of genomic epidemiology and phylodynamics will be introduced during the outbreak investigation, guided by the facilitators. Software deployment will be handled by docker containers to speed up the set-up process.
 
 During the last part of the workshop, participants will present and share their findings to the other groups.
+
+### How to run the workshop
+
+- Install ...
