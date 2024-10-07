@@ -27,4 +27,12 @@ During the last part of the workshop, participants will present and share their 
 
 ### How to run the workshop
 
-- Install ...
+- Install required software:
+Docker
+AliView
+Tracer (from BEAST2)
+- Clone the tutorial:
+Pull the tutorial repository to your local machine using git clone or download it directly from GitHub.
+- Start the environment:
+Open your terminal and navigate to the folder containing the tutorial files.
+Run the following command: docker compose up -d
